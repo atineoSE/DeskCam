@@ -10,7 +10,7 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSWindow.toggleMask()
+        //NSWindow.toggleMask()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

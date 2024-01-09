@@ -712,19 +712,6 @@
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gWn-bb-Efn">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYb-sA-pyf">
-                                        <rect key="frame" x="202" y="119" width="75" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HhI-Xp-c25">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="didPressButton:" target="XfG-lQ-9wD" id="Ka1-Mh-wMK"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                             </customView>
                         </subviews>
                         <constraints>
