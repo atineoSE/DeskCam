@@ -13,10 +13,7 @@ extension NSWindow {
             print("NSWindow: can't find window")
             return
         }
-        if window.styleMask != .borderless {
-            window.styleMask = .borderless
-        } else {
-            window.styleMask = .titled
-        }
+        
+        window.styleMask = .resizable
     }
 }

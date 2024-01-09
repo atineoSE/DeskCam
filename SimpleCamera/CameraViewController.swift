@@ -14,7 +14,6 @@ class CameraViewController: NSViewController {
     private let session = AVCaptureSession()
     private var videoDataOutput = AVCaptureVideoDataOutput()
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
-    private var trackingArea: NSTrackingArea?
     
     @IBOutlet weak var cameraView: NSView!
     
@@ -31,7 +30,6 @@ class CameraViewController: NSViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         updateLayers()
-        registerTrackingAreaIfNeeded()
     }
 
     private func setupAVCapture() {
@@ -97,34 +95,6 @@ class CameraViewController: NSViewController {
         }
         cameraLayer.frame = cameraView.bounds
         print("Updated layer frame to \(cameraView.bounds)")
-    }
-}
-
-// MARK: - Tracking area
-
-extension CameraViewController {
-    private func registerTrackingAreaIfNeeded() {
-        guard trackingArea == nil else {
-            return
-        }
-        print("CAMERA VIEW CONTROLLER: registering tracking area \(cameraView.bounds)")
-        let trackingArea = NSTrackingArea(
-            rect: cameraView.bounds,
-            options: NSTrackingArea.Options(rawValue: NSTrackingArea.Options.mouseEnteredAndExited.rawValue | NSTrackingArea.Options.activeAlways.rawValue),
-            owner: self
-        )
-        self.trackingArea = trackingArea
-        cameraView.addTrackingArea(trackingArea)
-    }
-    
-    override func mouseExited(with event: NSEvent) {
-        print("CAMERA VIEW CONTROLLER: mouse exited")
-        //NSWindow.toggleMask()
-    }
-    
-    override func mouseEntered(with event: NSEvent) {
-        print("CAMERA VIEW CONTROLLER: mouse entered")
-        //NSWindow.toggleMask()
     }
 }
 
