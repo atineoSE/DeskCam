@@ -8,7 +8,7 @@
 import AppKit
 import AVFoundation
 
-class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+class CameraViewController: NSViewController {
     private var cameraLayer: AVCaptureVideoPreviewLayer?
     private var bufferSize: CGSize = .zero
     private let session = AVCaptureSession()
@@ -17,6 +17,11 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
     
     @IBOutlet weak var cameraView: NSView!
 
+    @IBAction func didPressButton(_ sender: Any) {
+        print("did press button")
+        NSWindow.toggleMask()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
@@ -31,9 +36,8 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
         super.viewDidLayout()
         updateLayers()
     }
-    
-    // MARK: Setup
-    func setupAVCapture() {
+
+    private func setupAVCapture() {
         var deviceInput: AVCaptureDeviceInput!
         
         // Select a video device, make an input
@@ -81,7 +85,7 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
         session.commitConfiguration()
     }
     
-    func setupLayers() {
+    private func setupLayers() {
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
         self.cameraLayer = cameraLayer
         cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -89,7 +93,7 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
         cameraView.layer = cameraLayer
     }
     
-    func updateLayers() {
+    private func updateLayers() {
         guard let cameraLayer = cameraLayer else {
             print("CAMERA VIEW CONTROLLER: ERROR - can't update layer")
             return
@@ -97,9 +101,10 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
         cameraLayer.frame = cameraView.bounds
         print("Updated layer frame to \(cameraView.bounds)")
     }
+}
 
-
-    // MARK: Capture
+extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        // No-op
     }
 }
