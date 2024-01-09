@@ -95,6 +95,8 @@ class CameraViewController: NSViewController {
         }
         cameraLayer.frame = cameraView.bounds
         print("Updated layer frame to \(cameraView.bounds)")
+        cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
+        cameraLayer.connection?.isVideoMirrored = true
     }
 }
 
