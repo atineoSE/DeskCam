@@ -710,6 +710,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MIT-1G-hY1">
+                                <rect key="frame" x="221" y="127" width="37" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Sample" id="rmR-Cy-7dE">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gWn-bb-Efn">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
@@ -717,7 +725,9 @@
                         <constraints>
                             <constraint firstItem="gWn-bb-Efn" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="GkI-qF-cM9"/>
                             <constraint firstAttribute="bottom" secondItem="gWn-bb-Efn" secondAttribute="bottom" id="HAd-Ff-gXV"/>
+                            <constraint firstItem="MIT-1G-hY1" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="adh-Mi-9HZ"/>
                             <constraint firstItem="gWn-bb-Efn" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="kDl-F7-p2i"/>
+                            <constraint firstItem="MIT-1G-hY1" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="l6P-Zv-BCJ"/>
                             <constraint firstAttribute="trailing" secondItem="gWn-bb-Efn" secondAttribute="trailing" id="sXi-Q2-0zm"/>
                         </constraints>
                     </view>

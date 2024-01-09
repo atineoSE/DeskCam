@@ -9,8 +9,7 @@ import AppKit
 import AVFoundation
 
 class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-    private var rootLayer: CALayer?
-    private var cameraLayer: AVCaptureVideoPreviewLayer! = nil
+    private var cameraLayer: AVCaptureVideoPreviewLayer?
     private var bufferSize: CGSize = .zero
     private let session = AVCaptureSession()
     private var videoDataOutput = AVCaptureVideoDataOutput()
@@ -26,6 +25,11 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
         print("CAMERA VIEW CONTROLLER: set up layers")
         session.startRunning()
         print("CAMERA VIEW CONTROLLER: started session")
+    }
+    
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        updateLayers()
     }
     
     // MARK: Setup
@@ -78,18 +82,20 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func setupLayers() {
-       // bind root layer
-       rootLayer = cameraView.layer
-        
-        // preview layer
-        cameraLayer = AVCaptureVideoPreviewLayer(session: session)
+        let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
+        self.cameraLayer = cameraLayer
         cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        rootLayer?.addSublayer(cameraLayer)
+        cameraView.wantsLayer = true
+        cameraView.layer = cameraLayer
     }
     
     func updateLayers() {
+        guard let cameraLayer = cameraLayer else {
+            print("CAMERA VIEW CONTROLLER: ERROR - can't update layer")
+            return
+        }
         cameraLayer.frame = cameraView.bounds
-        cameraLayer.connection?.isVideoMirrored = true
+        print("Updated layer frame to \(cameraView.bounds)")
     }
 
 
@@ -97,5 +103,3 @@ class CameraViewController: NSViewController, AVCaptureVideoDataOutputSampleBuff
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
     }
 }
-
-
