@@ -12,15 +12,15 @@ extension NSWindow {
         NSApplication.shared.windows.first
     }
     
-    static func toggleMask() {
+    static func toggleStyle() {
         guard let currentWindow = currentWindow else {
             print("NSWINDOW: ERROR - could not find window")
             return
         }
-        if currentWindow.styleMask == .resizable {
-            currentWindow.styleMask = .titled
+        if currentWindow.styleMask == .borderless {
+            currentWindow.styleMask = [.titled, .resizable]
         } else {
-            currentWindow.styleMask = .resizable
+            currentWindow.styleMask = .borderless
         }
     }
     

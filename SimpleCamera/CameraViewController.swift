@@ -16,8 +16,13 @@ class CameraViewController: NSViewController {
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     @IBOutlet weak var cameraView: NSView!
-    private var trackingArea: NSTrackingArea?
+    private var isUsingCircleMask: Bool = false
     
+    @IBAction func didClickOnCameraView(_ sender: Any) {
+        print("CAMERA VIEW CONTROLLER: did click on camera view - toggle mask and window style")
+        NSWindow.toggleStyle()
+        toggleMask()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
@@ -97,55 +102,21 @@ class CameraViewController: NSViewController {
         // Configure layer
         cameraLayer.frame = cameraView.bounds
         print("CAMERA VIEW CONTROLLER: Updated layer frame to \(cameraView.bounds)")
-        setMask(isCircle: true)
         
         // Set video as mirrored
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
         cameraLayer.connection?.isVideoMirrored = true
-        
-
-        // Register to update window style with hover
-        registerTrackingAreaIfNeeded()
     }
     
-    private func setMask(isCircle: Bool) {
+    private func toggleMask() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = cameraView.bounds
-        shapeLayer.path = isCircle ?
+        isUsingCircleMask.toggle()
+        shapeLayer.path = isUsingCircleMask ?
             CGPath(ellipseIn: cameraView.bounds, transform: nil) :
             CGPath(rect: cameraView.bounds, transform: nil)
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
-    }
-}
-
-extension CameraViewController {
-    private func registerTrackingAreaIfNeeded() {
-        guard trackingArea == nil else {
-            return
-        }
-        print("CAMERA VIEW CONTROLLER: registering tracking area \(cameraView.bounds)")
-        let trackingArea = NSTrackingArea(
-            rect: cameraView.bounds,
-            options: NSTrackingArea.Options(rawValue: NSTrackingArea.Options.mouseEnteredAndExited.rawValue | NSTrackingArea.Options.activeAlways.rawValue),
-            owner: self
-        )
-        self.trackingArea = trackingArea
-        cameraView.addTrackingArea(trackingArea)
-    }
-    
-    override func mouseExited(with event: NSEvent) {
-        print("CAMERA VIEW CONTROLLER: mouse exited")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            NSWindow.toggleMask()
-            self?.setMask(isCircle: true)
-        }
-    }
-    
-    override func mouseEntered(with event: NSEvent) {
-        print("CAMERA VIEW CONTROLLER: mouse entered")
-        NSWindow.toggleMask()
-        setMask(isCircle: false)
     }
 }
 
