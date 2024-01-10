@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3C26A2032B4D8AC900E58922 /* SimpleCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C26A2032B4D8AC900E58922 /* DeskCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C26A2062B4D8AC900E58922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C26A2082B4D8AC900E58922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 		3C26A2042B4D8AC900E58922 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3C26A2032B4D8AC900E58922 /* SimpleCamera.app */,
+				3C26A2032B4D8AC900E58922 /* DeskCam.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,7 +86,7 @@
 			);
 			name = SimpleCamera;
 			productName = SimpleCamera;
-			productReference = 3C26A2032B4D8AC900E58922 /* SimpleCamera.app */;
+			productReference = 3C26A2032B4D8AC900E58922 /* DeskCam.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -286,7 +286,7 @@
 				CODE_SIGN_ENTITLEMENTS = SimpleCamera/SimpleCamera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = WDVRK9UE68;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -303,7 +303,7 @@
 				);
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adriantineo.DeskCam;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DeskCam;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -317,7 +317,7 @@
 				CODE_SIGN_ENTITLEMENTS = SimpleCamera/SimpleCamera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = WDVRK9UE68;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -334,7 +334,7 @@
 				);
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adriantineo.DeskCam;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DeskCam;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
