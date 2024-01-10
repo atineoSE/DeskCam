@@ -19,4 +19,8 @@ extension NSWindow {
     static func makeWindowTopMost() {
         NSWindow.currentWindow?.level = .floating
     }
+    
+    static func setTransparency() {
+        NSWindow.currentWindow?.backgroundColor = .clear
+    }
 }

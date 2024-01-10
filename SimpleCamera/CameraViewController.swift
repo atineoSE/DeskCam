@@ -106,6 +106,7 @@ class CameraViewController: NSViewController {
         shapeLayer.frame = cameraView.bounds
         shapeLayer.path = CGPath(ellipseIn: cameraView.bounds, transform: nil)
         cameraView.layer?.mask = shapeLayer
+        cameraView.layer?.backgroundColor = .clear
     }
 }
 

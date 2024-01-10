@@ -12,6 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSWindow.toggleMask()
         NSWindow.makeWindowTopMost()
+        NSWindow.setTransparency()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
