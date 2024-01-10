@@ -11,6 +11,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSWindow.toggleMask()
+        NSWindow.makeWindowTopMost()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

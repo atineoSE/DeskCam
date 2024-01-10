@@ -8,12 +8,15 @@
 import AppKit
 
 extension NSWindow {
+    static var currentWindow: NSWindow? {
+        NSApplication.shared.windows.first
+    }
+    
     static func toggleMask() {
-        guard let window = NSApplication.shared.windows.first else {
-            print("NSWindow: can't find window")
-            return
-        }
-        
-        window.styleMask = .resizable
+        NSWindow.currentWindow?.styleMask = .resizable
+    }
+    
+    static func makeWindowTopMost() {
+        NSWindow.currentWindow?.level = .floating
     }
 }
