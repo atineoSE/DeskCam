@@ -13,7 +13,15 @@ extension NSWindow {
     }
     
     static func toggleMask() {
-        NSWindow.currentWindow?.styleMask = .resizable
+        guard let currentWindow = currentWindow else {
+            print("NSWINDOW: ERROR - could not find window")
+            return
+        }
+        if currentWindow.styleMask == .resizable {
+            currentWindow.styleMask = .titled
+        } else {
+            currentWindow.styleMask = .resizable
+        }
     }
     
     static func makeWindowTopMost() {

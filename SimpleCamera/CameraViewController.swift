@@ -94,17 +94,17 @@ class CameraViewController: NSViewController {
             print("CAMERA VIEW CONTROLLER: ERROR - can't update layer")
             return
         }
-        // Set layer size
+        // Configure layer
         cameraLayer.frame = cameraView.bounds
-        print("Updated layer frame to \(cameraView.bounds)")
+        print("CAMERA VIEW CONTROLLER: Updated layer frame to \(cameraView.bounds)")
+        setMask(isCircle: true)
         
         // Set video as mirrored
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
         cameraLayer.connection?.isVideoMirrored = true
         
-        // Mask view
-        setMask(isCircle: true)
-        
+
+        // Register to update window style with hover
         registerTrackingAreaIfNeeded()
     }
     
@@ -137,12 +137,14 @@ extension CameraViewController {
     override func mouseExited(with event: NSEvent) {
         print("CAMERA VIEW CONTROLLER: mouse exited")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            NSWindow.toggleMask()
             self?.setMask(isCircle: true)
         }
     }
     
     override func mouseEntered(with event: NSEvent) {
         print("CAMERA VIEW CONTROLLER: mouse entered")
+        NSWindow.toggleMask()
         setMask(isCircle: false)
     }
 }
