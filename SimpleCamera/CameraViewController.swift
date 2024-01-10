@@ -93,10 +93,19 @@ class CameraViewController: NSViewController {
             print("CAMERA VIEW CONTROLLER: ERROR - can't update layer")
             return
         }
+        // Set layer size
         cameraLayer.frame = cameraView.bounds
         print("Updated layer frame to \(cameraView.bounds)")
+        
+        // Set video as mirrored
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
         cameraLayer.connection?.isVideoMirrored = true
+        
+        // Mask view
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.frame = cameraView.bounds
+        shapeLayer.path = CGPath(ellipseIn: cameraView.bounds, transform: nil)
+        cameraView.layer?.mask = shapeLayer
     }
 }
 
