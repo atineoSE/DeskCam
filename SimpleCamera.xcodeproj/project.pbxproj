@@ -24,6 +24,7 @@
 		3C26A20F2B4D8ACA00E58922 /* SimpleCamera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleCamera.entitlements; sourceTree = "<group>"; };
 		3C26A2152B4D8B0600E58922 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		3C26A2192B4D9E5E00E58922 /* NSWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
+		3C26A21D2B4EB24E00E58922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +57,7 @@
 		3C26A2052B4D8AC900E58922 /* SimpleCamera */ = {
 			isa = PBXGroup;
 			children = (
+				3C26A21D2B4EB24E00E58922 /* Info.plist */,
 				3C26A2062B4D8AC900E58922 /* AppDelegate.swift */,
 				3C26A2082B4D8AC900E58922 /* ViewController.swift */,
 				3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */,
@@ -288,7 +290,10 @@
 				DEVELOPMENT_TEAM = WDVRK9UE68;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleCamera/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DeskCam;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "DeskCam uses your camera to display the camera view.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -297,7 +302,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adriantineo.SimpleCameraForMac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adriantineo.DeskCam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -316,7 +321,10 @@
 				DEVELOPMENT_TEAM = WDVRK9UE68;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleCamera/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DeskCam;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "DeskCam uses your camera to display the camera view.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -325,7 +333,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adriantineo.SimpleCameraForMac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adriantineo.DeskCam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
