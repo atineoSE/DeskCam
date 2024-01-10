@@ -16,6 +16,7 @@ class CameraViewController: NSViewController {
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     @IBOutlet weak var cameraView: NSView!
+    private var trackingArea: NSTrackingArea?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,11 +103,47 @@ class CameraViewController: NSViewController {
         cameraLayer.connection?.isVideoMirrored = true
         
         // Mask view
+        setMask(isCircle: true)
+        
+        registerTrackingAreaIfNeeded()
+    }
+    
+    private func setMask(isCircle: Bool) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = cameraView.bounds
-        shapeLayer.path = CGPath(ellipseIn: cameraView.bounds, transform: nil)
+        shapeLayer.path = isCircle ?
+            CGPath(ellipseIn: cameraView.bounds, transform: nil) :
+            CGPath(rect: cameraView.bounds, transform: nil)
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
+    }
+}
+
+extension CameraViewController {
+    private func registerTrackingAreaIfNeeded() {
+        guard trackingArea == nil else {
+            return
+        }
+        print("CAMERA VIEW CONTROLLER: registering tracking area \(cameraView.bounds)")
+        let trackingArea = NSTrackingArea(
+            rect: cameraView.bounds,
+            options: NSTrackingArea.Options(rawValue: NSTrackingArea.Options.mouseEnteredAndExited.rawValue | NSTrackingArea.Options.activeAlways.rawValue),
+            owner: self
+        )
+        self.trackingArea = trackingArea
+        cameraView.addTrackingArea(trackingArea)
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        print("CAMERA VIEW CONTROLLER: mouse exited")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.setMask(isCircle: true)
+        }
+    }
+    
+    override func mouseEntered(with event: NSEvent) {
+        print("CAMERA VIEW CONTROLLER: mouse entered")
+        setMask(isCircle: false)
     }
 }
 
