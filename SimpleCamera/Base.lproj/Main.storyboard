@@ -66,6 +66,11 @@
                                                 <segue destination="9L6-US-oCV" kind="modal" id="0jH-Kt-XBd"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Toggle view" keyEquivalent="t" id="GrK-0y-9I2">
+                                            <connections>
+                                                <action selector="didToggleView:" target="Voe-Tx-rLC" id="duZ-u2-Ic9"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
@@ -141,7 +146,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="85" y="-139"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -365,7 +370,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="722"/>
         </scene>
     </scenes>
 </document>

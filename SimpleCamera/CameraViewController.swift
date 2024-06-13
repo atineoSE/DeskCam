@@ -18,11 +18,6 @@ class CameraViewController: NSViewController {
     @IBOutlet weak var cameraView: NSView!
     private var isUsingCircleMask: Bool = false
     
-    @IBAction func didClickOnCameraView(_ sender: Any) {
-        print("CAMERA VIEW CONTROLLER: did click on camera view - toggle mask and window style")
-        NSWindow.toggleStyle()
-        toggleMask()
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
@@ -37,7 +32,17 @@ class CameraViewController: NSViewController {
         super.viewDidLayout()
         updateLayers()
     }
-
+    
+    @IBAction func didClickOnCameraView(_ sender: Any) {
+        print("CAMERA VIEW CONTROLLER: did click on camera view - toggle mask and window style")
+        NSWindow.toggleStyle()
+        toggleMask()
+    }
+    
+    func dummyFunc() {
+        print("dummyFunc")
+    }
+    
     private func setupAVCapture() {
         var deviceInput: AVCaptureDeviceInput!
         
