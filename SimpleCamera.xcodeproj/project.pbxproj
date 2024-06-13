@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C1DF5E32C1B56AF002F27E7 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */; };
 		3C26A2072B4D8AC900E58922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2062B4D8AC900E58922 /* AppDelegate.swift */; };
 		3C26A20B2B4D8ACA00E58922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */; };
 		3C26A20E2B4D8ACA00E58922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C26A20C2B4D8ACA00E58922 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		3C26A2032B4D8AC900E58922 /* DeskCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C26A2062B4D8AC900E58922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				3C26A2062B4D8AC900E58922 /* AppDelegate.swift */,
 				3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */,
 				3C26A20C2B4D8ACA00E58922 /* Main.storyboard */,
+				3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */,
 				3C26A2152B4D8B0600E58922 /* CameraViewController.swift */,
 				3C26A2192B4D9E5E00E58922 /* NSWindow.swift */,
 				3C26A20F2B4D8ACA00E58922 /* SimpleCamera.entitlements */,
@@ -138,6 +141,7 @@
 			files = (
 				3C26A2072B4D8AC900E58922 /* AppDelegate.swift in Sources */,
 				3C26A21A2B4D9E5E00E58922 /* NSWindow.swift in Sources */,
+				3C1DF5E32C1B56AF002F27E7 /* ConfigViewController.swift in Sources */,
 				3C26A2162B4D8B0600E58922 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -60,6 +60,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
+                                        <menuItem title="Config view..." keyEquivalent="c" id="Blh-4W-62S">
+                                            <connections>
+                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="o23-8j-EBh"/>
+                                                <segue destination="9L6-US-oCV" kind="modal" id="0jH-Kt-XBd"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
@@ -157,6 +163,175 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--Config view-->
+        <scene sceneID="zF6-cP-0AJ">
+            <objects>
+                <viewController title="Config view" id="9L6-US-oCV" customClass="ConfigViewController" customModule="DeskCam" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="u4s-z9-d1U">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="216"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="M20-Hl-1wm" userLabel="CardView">
+                                <rect key="frame" x="8" y="8" width="434" height="164"/>
+                                <subviews>
+                                    <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47u-MW-Wm7">
+                                        <rect key="frame" x="8" y="8" width="418" height="148"/>
+                                        <subviews>
+                                            <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="isz-Sj-S01">
+                                                <rect key="frame" x="0.0" y="38" width="205" height="72"/>
+                                                <subviews>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97f-sv-eI6">
+                                                        <rect key="frame" x="154" y="56" width="53" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Position" id="uvr-7m-vtL">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="efd-C6-5kU">
+                                                        <rect key="frame" x="170" y="28" width="37" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Mask" id="Iti-7M-uEw">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-wO-Oiq">
+                                                        <rect key="frame" x="177" y="0.0" width="30" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Size" id="eQj-da-lo6">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
+                                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXq-OL-MMb">
+                                                <rect key="frame" x="213" y="36" width="205" height="76"/>
+                                                <subviews>
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-ys-L6B">
+                                                        <rect key="frame" x="-3" y="52" width="82" height="25"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Circle" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pKG-di-Qqy" id="fO9-fB-MsC">
+                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="menu"/>
+                                                            <menu key="menu" id="pD7-y8-cb0">
+                                                                <items>
+                                                                    <menuItem title="Circle" state="on" id="pKG-di-Qqy"/>
+                                                                    <menuItem title="Oval" id="cw1-8f-eSM"/>
+                                                                    <menuItem title="Square" id="edc-In-tih"/>
+                                                                </items>
+                                                            </menu>
+                                                        </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="positionOneDidChange:" target="9L6-US-oCV" id="B2e-Iy-T8v"/>
+                                                        </connections>
+                                                    </popUpButton>
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l">
+                                                        <rect key="frame" x="-3" y="24" width="88" height="25"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Small" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2CY-SU-ati" id="6km-Da-zjO">
+                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="menu"/>
+                                                            <menu key="menu" id="K9H-3Y-Y39">
+                                                                <items>
+                                                                    <menuItem title="Small" state="on" id="2CY-SU-ati"/>
+                                                                    <menuItem title="Medium" id="wgx-hl-W6Z"/>
+                                                                    <menuItem title="Large" id="OJX-LP-YN3"/>
+                                                                </items>
+                                                            </menu>
+                                                        </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="maskOneDidChange:" target="9L6-US-oCV" id="dlk-qS-vX6"/>
+                                                        </connections>
+                                                    </popUpButton>
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr">
+                                                        <rect key="frame" x="-3" y="-4" width="118" height="25"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Top-left" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="P1t-tj-TnA" id="UhW-8v-5Mq">
+                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="menu"/>
+                                                            <menu key="menu" id="8J3-P5-e64">
+                                                                <items>
+                                                                    <menuItem title="Top-left" state="on" id="P1t-tj-TnA"/>
+                                                                    <menuItem title="Top-right" id="5Vz-xD-wHu"/>
+                                                                    <menuItem title="Center" id="KNi-MC-If9"/>
+                                                                    <menuItem title="Bottom-left" id="tQo-uq-kjG"/>
+                                                                    <menuItem title="Bottom-right" id="27J-bX-j9F"/>
+                                                                </items>
+                                                            </menu>
+                                                        </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="sizeOneDidChange:" target="9L6-US-oCV" id="TW3-dw-tMU"/>
+                                                        </connections>
+                                                    </popUpButton>
+                                                </subviews>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="47u-MW-Wm7" secondAttribute="trailing" constant="8" id="4gM-tX-djx"/>
+                                    <constraint firstItem="47u-MW-Wm7" firstAttribute="leading" secondItem="M20-Hl-1wm" secondAttribute="leading" constant="8" id="IfV-Ej-Uma"/>
+                                    <constraint firstItem="47u-MW-Wm7" firstAttribute="top" secondItem="M20-Hl-1wm" secondAttribute="top" constant="8" id="RNs-cL-z8d"/>
+                                    <constraint firstAttribute="bottom" secondItem="47u-MW-Wm7" secondAttribute="bottom" constant="8" id="kiK-xG-ZsD"/>
+                                </constraints>
+                            </customView>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vdQ-ue-frY">
+                                <rect key="frame" x="198" y="164" width="54" height="32"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Config 1" id="ZIj-b8-RlT">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="M20-Hl-1wm" firstAttribute="leading" secondItem="u4s-z9-d1U" secondAttribute="leading" constant="8" id="1ff-ws-LoL"/>
+                            <constraint firstAttribute="trailing" secondItem="M20-Hl-1wm" secondAttribute="trailing" constant="8" id="FDY-OX-1JV"/>
+                            <constraint firstItem="vdQ-ue-frY" firstAttribute="centerX" secondItem="u4s-z9-d1U" secondAttribute="centerX" id="QnN-tk-eBx"/>
+                            <constraint firstItem="vdQ-ue-frY" firstAttribute="bottom" secondItem="M20-Hl-1wm" secondAttribute="top" constant="8" id="VHG-fa-aCB"/>
+                            <constraint firstAttribute="bottom" secondItem="M20-Hl-1wm" secondAttribute="bottom" constant="8" id="lZ5-NY-NJa"/>
+                            <constraint firstItem="M20-Hl-1wm" firstAttribute="top" secondItem="u4s-z9-d1U" secondAttribute="top" constant="44" id="tQq-Xy-3sM"/>
+                            <constraint firstItem="vdQ-ue-frY" firstAttribute="top" secondItem="u4s-z9-d1U" secondAttribute="top" constant="20" symbolic="YES" id="tUk-mZ-GOb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundViewOne" destination="M20-Hl-1wm" id="rV6-mf-iQ2"/>
+                        <outlet property="maskButtonOne" destination="H0T-wW-32l" id="Oyk-PG-qiC"/>
+                        <outlet property="positionButtonOne" destination="GJ3-ys-L6B" id="Nm9-Db-Rcl"/>
+                        <outlet property="sizeButtonOne" destination="HUA-7i-MPr" id="DBW-cP-Yog"/>
+                    </connections>
+                </viewController>
+                <customObject id="Zn9-EP-ADl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="304"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="hIz-AP-VOD">
