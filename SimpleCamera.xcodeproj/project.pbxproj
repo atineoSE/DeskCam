@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3C26A2072B4D8AC900E58922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2062B4D8AC900E58922 /* AppDelegate.swift */; };
-		3C26A2092B4D8AC900E58922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2082B4D8AC900E58922 /* ViewController.swift */; };
 		3C26A20B2B4D8ACA00E58922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */; };
 		3C26A20E2B4D8ACA00E58922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C26A20C2B4D8ACA00E58922 /* Main.storyboard */; };
 		3C26A2162B4D8B0600E58922 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2152B4D8B0600E58922 /* CameraViewController.swift */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		3C26A2032B4D8AC900E58922 /* DeskCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C26A2062B4D8AC900E58922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3C26A2082B4D8AC900E58922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C26A20D2B4D8ACA00E58922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C26A20F2B4D8ACA00E58922 /* SimpleCamera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleCamera.entitlements; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 			children = (
 				3C26A21D2B4EB24E00E58922 /* Info.plist */,
 				3C26A2062B4D8AC900E58922 /* AppDelegate.swift */,
-				3C26A2082B4D8AC900E58922 /* ViewController.swift */,
 				3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */,
 				3C26A20C2B4D8ACA00E58922 /* Main.storyboard */,
 				3C26A2152B4D8B0600E58922 /* CameraViewController.swift */,
@@ -139,7 +136,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C26A2092B4D8AC900E58922 /* ViewController.swift in Sources */,
 				3C26A2072B4D8AC900E58922 /* AppDelegate.swift in Sources */,
 				3C26A21A2B4D9E5E00E58922 /* NSWindow.swift in Sources */,
 				3C26A2162B4D8B0600E58922 /* CameraViewController.swift in Sources */,
