@@ -9,6 +9,16 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    let stateController = StateController()
+    
+    private var mainStoryboard: NSStoryboard {
+        return NSStoryboard(name: "Main", bundle: nil)
+    }
+    
+    private var contentViewController: NSViewController? {
+        NSApplication.shared.mainWindow?.windowController?.contentViewController
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSWindow.makeWindowTopMost()
         NSWindow.setTransparency()
@@ -21,11 +31,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    @IBAction func showConfigView(_ sender: Any) {
+        let configViewController = mainStoryboard.instantiateController(withIdentifier: "ConfigViewController") as! ConfigViewController
+        configViewController.stateController = stateController
+        contentViewController?.presentAsModalWindow(configViewController)
+    }
+    
     @IBAction func didToggleView(_ sender: Any) {
         print("APP DELEGATE: toggled view")
-        guard
-            let cameraViewController = NSApplication.shared.mainWindow?.windowController?.contentViewController as? CameraViewController
-        else {
+        guard let cameraViewController = contentViewController as? CameraViewController else {
             print("MAIN APPLICATION: ERROR - could not find camera view controller")
             return
         }

@@ -62,8 +62,7 @@
                                     <items>
                                         <menuItem title="Config view..." keyEquivalent="c" id="Blh-4W-62S">
                                             <connections>
-                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="o23-8j-EBh"/>
-                                                <segue destination="9L6-US-oCV" kind="modal" id="0jH-Kt-XBd"/>
+                                                <action selector="showConfigView:" target="Voe-Tx-rLC" id="0Lb-tw-w1J"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Toggle view" keyEquivalent="t" id="GrK-0y-9I2">
@@ -172,7 +171,7 @@
         <!--Config view-->
         <scene sceneID="zF6-cP-0AJ">
             <objects>
-                <viewController title="Config view" id="9L6-US-oCV" customClass="ConfigViewController" customModule="DeskCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Config view" storyboardIdentifier="ConfigViewController" id="9L6-US-oCV" customClass="ConfigViewController" customModule="DeskCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="u4s-z9-d1U">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="216"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -225,16 +224,14 @@
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXq-OL-MMb">
                                                 <rect key="frame" x="213" y="36" width="205" height="76"/>
                                                 <subviews>
-                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-ys-L6B">
-                                                        <rect key="frame" x="-3" y="52" width="82" height="25"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Circle" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pKG-di-Qqy" id="fO9-fB-MsC">
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-ys-L6B" userLabel="Mask Button One">
+                                                        <rect key="frame" x="-3" y="52" width="66" height="25"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pKG-di-Qqy" id="fO9-fB-MsC">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="pD7-y8-cb0">
                                                                 <items>
-                                                                    <menuItem title="Circle" state="on" id="pKG-di-Qqy"/>
-                                                                    <menuItem title="Oval" id="cw1-8f-eSM"/>
-                                                                    <menuItem title="Square" id="edc-In-tih"/>
+                                                                    <menuItem title="Item" state="on" id="pKG-di-Qqy"/>
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
@@ -242,16 +239,14 @@
                                                             <action selector="positionOneDidChange:" target="9L6-US-oCV" id="B2e-Iy-T8v"/>
                                                         </connections>
                                                     </popUpButton>
-                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l">
-                                                        <rect key="frame" x="-3" y="24" width="88" height="25"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Small" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2CY-SU-ati" id="6km-Da-zjO">
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l" userLabel="Size Button One">
+                                                        <rect key="frame" x="-3" y="24" width="66" height="25"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="OJX-LP-YN3" id="6km-Da-zjO">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="K9H-3Y-Y39">
                                                                 <items>
-                                                                    <menuItem title="Small" state="on" id="2CY-SU-ati"/>
-                                                                    <menuItem title="Medium" id="wgx-hl-W6Z"/>
-                                                                    <menuItem title="Large" id="OJX-LP-YN3"/>
+                                                                    <menuItem title="Item" id="OJX-LP-YN3"/>
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
@@ -259,18 +254,14 @@
                                                             <action selector="maskOneDidChange:" target="9L6-US-oCV" id="dlk-qS-vX6"/>
                                                         </connections>
                                                     </popUpButton>
-                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr">
-                                                        <rect key="frame" x="-3" y="-4" width="118" height="25"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Top-left" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="P1t-tj-TnA" id="UhW-8v-5Mq">
+                                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr" userLabel="Position Button One">
+                                                        <rect key="frame" x="-3" y="-4" width="66" height="25"/>
+                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="27J-bX-j9F" id="UhW-8v-5Mq">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="8J3-P5-e64">
                                                                 <items>
-                                                                    <menuItem title="Top-left" state="on" id="P1t-tj-TnA"/>
-                                                                    <menuItem title="Top-right" id="5Vz-xD-wHu"/>
-                                                                    <menuItem title="Center" id="KNi-MC-If9"/>
-                                                                    <menuItem title="Bottom-left" id="tQo-uq-kjG"/>
-                                                                    <menuItem title="Bottom-right" id="27J-bX-j9F"/>
+                                                                    <menuItem title="Item" id="27J-bX-j9F"/>
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
@@ -336,7 +327,7 @@
                 </viewController>
                 <customObject id="Zn9-EP-ADl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="304"/>
+            <point key="canvasLocation" x="754" y="198"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="hIz-AP-VOD">

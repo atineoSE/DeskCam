@@ -8,15 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		3C1DF5E32C1B56AF002F27E7 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */; };
+		3C1DF5E72C1B6254002F27E7 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DF5E62C1B6254002F27E7 /* StateController.swift */; };
+		3C1DF5E92C1B6265002F27E7 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DF5E82C1B6265002F27E7 /* Mask.swift */; };
+		3C1DF5EB2C1B626D002F27E7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1DF5EA2C1B626D002F27E7 /* Size.swift */; };
 		3C26A2072B4D8AC900E58922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2062B4D8AC900E58922 /* AppDelegate.swift */; };
 		3C26A20B2B4D8ACA00E58922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */; };
 		3C26A20E2B4D8ACA00E58922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C26A20C2B4D8ACA00E58922 /* Main.storyboard */; };
 		3C26A2162B4D8B0600E58922 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2152B4D8B0600E58922 /* CameraViewController.swift */; };
 		3C26A21A2B4D9E5E00E58922 /* NSWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2192B4D9E5E00E58922 /* NSWindow.swift */; };
+		3C8D13742C1B63E900ECCA04 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13732C1B63E900ECCA04 /* Position.swift */; };
+		3C8D13762C1B642D00ECCA04 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13752C1B642D00ECCA04 /* State.swift */; };
+		3C8D13782C1B64CF00ECCA04 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */; };
+		3C8D137A2C1B683A00ECCA04 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13792C1B683A00ECCA04 /* AppLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
+		3C1DF5E62C1B6254002F27E7 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		3C1DF5E82C1B6265002F27E7 /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
+		3C1DF5EA2C1B626D002F27E7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		3C26A2032B4D8AC900E58922 /* DeskCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeskCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C26A2062B4D8AC900E58922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -25,6 +35,10 @@
 		3C26A2152B4D8B0600E58922 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		3C26A2192B4D9E5E00E58922 /* NSWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
 		3C26A21D2B4EB24E00E58922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3C8D13732C1B63E900ECCA04 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		3C8D13752C1B642D00ECCA04 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		3C8D13792C1B683A00ECCA04 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +52,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C1DF5EC2C1B6294002F27E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3C1DF5E82C1B6265002F27E7 /* Mask.swift */,
+				3C1DF5EA2C1B626D002F27E7 /* Size.swift */,
+				3C8D13732C1B63E900ECCA04 /* Position.swift */,
+				3C8D13752C1B642D00ECCA04 /* State.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3C1DF5ED2C1B62AB002F27E7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */,
+				3C26A2152B4D8B0600E58922 /* CameraViewController.swift */,
+				3C1DF5E62C1B6254002F27E7 /* StateController.swift */,
+				3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */,
+				3C8D13792C1B683A00ECCA04 /* AppLogger.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3C1DF5EE2C1B62C5002F27E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3C26A20C2B4D8ACA00E58922 /* Main.storyboard */,
+				3C26A2192B4D9E5E00E58922 /* NSWindow.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3C26A1FA2B4D8AC900E58922 = {
 			isa = PBXGroup;
 			children = (
@@ -57,14 +103,13 @@
 		3C26A2052B4D8AC900E58922 /* SimpleCamera */ = {
 			isa = PBXGroup;
 			children = (
+				3C26A20F2B4D8ACA00E58922 /* SimpleCamera.entitlements */,
 				3C26A21D2B4EB24E00E58922 /* Info.plist */,
 				3C26A2062B4D8AC900E58922 /* AppDelegate.swift */,
 				3C26A20A2B4D8ACA00E58922 /* Assets.xcassets */,
-				3C26A20C2B4D8ACA00E58922 /* Main.storyboard */,
-				3C1DF5E22C1B56AF002F27E7 /* ConfigViewController.swift */,
-				3C26A2152B4D8B0600E58922 /* CameraViewController.swift */,
-				3C26A2192B4D9E5E00E58922 /* NSWindow.swift */,
-				3C26A20F2B4D8ACA00E58922 /* SimpleCamera.entitlements */,
+				3C1DF5EC2C1B6294002F27E7 /* Model */,
+				3C1DF5EE2C1B62C5002F27E7 /* View */,
+				3C1DF5ED2C1B62AB002F27E7 /* Controller */,
 			);
 			path = SimpleCamera;
 			sourceTree = "<group>";
@@ -140,9 +185,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C26A2072B4D8AC900E58922 /* AppDelegate.swift in Sources */,
+				3C1DF5EB2C1B626D002F27E7 /* Size.swift in Sources */,
 				3C26A21A2B4D9E5E00E58922 /* NSWindow.swift in Sources */,
 				3C1DF5E32C1B56AF002F27E7 /* ConfigViewController.swift in Sources */,
 				3C26A2162B4D8B0600E58922 /* CameraViewController.swift in Sources */,
+				3C8D13762C1B642D00ECCA04 /* State.swift in Sources */,
+				3C1DF5E72C1B6254002F27E7 /* StateController.swift in Sources */,
+				3C8D13742C1B63E900ECCA04 /* Position.swift in Sources */,
+				3C8D13782C1B64CF00ECCA04 /* AppSettings.swift in Sources */,
+				3C8D137A2C1B683A00ECCA04 /* AppLogger.swift in Sources */,
+				3C1DF5E92C1B6265002F27E7 /* Mask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
