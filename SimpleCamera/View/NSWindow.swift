@@ -8,27 +8,19 @@
 import AppKit
 
 extension NSWindow {
-    static var currentWindow: NSWindow? {
-        NSApplication.shared.windows.first
-    }
-    
-    static func toggleStyle() {
-        guard let currentWindow = currentWindow else {
-            print("NSWINDOW: ERROR - could not find window")
-            return
-        }
-        if currentWindow.styleMask == .borderless {
-            currentWindow.styleMask = [.titled, .resizable]
+    func toggleStyle() {
+        if styleMask == .borderless {
+            styleMask = [.titled, .resizable]
         } else {
-            currentWindow.styleMask = .borderless
+            styleMask = .borderless
         }
     }
     
-    static func makeWindowTopMost() {
-        NSWindow.currentWindow?.level = .floating
+    func makeWindowTopMost() {
+        level = .floating
     }
     
-    static func setTransparency() {
-        NSWindow.currentWindow?.backgroundColor = .clear
+    func setTransparency() {
+        backgroundColor = .clear
     }
 }

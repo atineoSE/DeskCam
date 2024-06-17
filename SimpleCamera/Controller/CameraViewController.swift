@@ -17,6 +17,8 @@ class CameraViewController: NSViewController {
     
     @IBOutlet weak var cameraView: NSView!
     private var isUsingCircleMask: Bool = false
+    weak var windowDelegate: WindowDelegate?
+    weak var stateController: StateController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,7 @@ class CameraViewController: NSViewController {
     
     @IBAction func didClickOnCameraView(_ sender: Any) {
         print("CAMERA VIEW CONTROLLER: did click on camera view - toggle mask and window style")
-        NSWindow.toggleStyle()
+        windowDelegate?.toggleStyle()
         toggleMask()
     }
     

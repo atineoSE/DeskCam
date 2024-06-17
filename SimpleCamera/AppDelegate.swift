@@ -9,7 +9,9 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    var window: NSWindow?
     let stateController = StateController()
+    var cameraViewController: CameraViewController!
     
     private var mainStoryboard: NSStoryboard {
         return NSStoryboard(name: "Main", bundle: nil)
@@ -20,8 +22,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSWindow.makeWindowTopMost()
-        NSWindow.setTransparency()
+//        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+//                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
+//                              backing: .buffered,
+//                              defer: false)
+//        window.contentViewController = initialViewController
+        
+        cameraViewController = mainStoryboard.instantiateController(withIdentifier: "CameraViewController") as! CameraViewController
+        cameraViewController.windowDelegate = self
+        cameraViewController.stateController = stateController
+        
+        window = NSWindow(contentViewController: cameraViewController)
+        window?.makeKeyAndOrderFront(self)
+        window?.setTransparency()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -34,15 +47,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func showConfigView(_ sender: Any) {
         let configViewController = mainStoryboard.instantiateController(withIdentifier: "ConfigViewController") as! ConfigViewController
         configViewController.stateController = stateController
-        contentViewController?.presentAsModalWindow(configViewController)
+        cameraViewController.presentAsModalWindow(configViewController)
     }
     
     @IBAction func didToggleView(_ sender: Any) {
         print("APP DELEGATE: toggled view")
-        guard let cameraViewController = contentViewController as? CameraViewController else {
-            print("MAIN APPLICATION: ERROR - could not find camera view controller")
-            return
-        }
-        cameraViewController.dummyFunc()
+    }
+}
+
+extension AppDelegate: WindowDelegate {
+    func toggleStyle() {
+        window?.toggleStyle()
     }
 }
