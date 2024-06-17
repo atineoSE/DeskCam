@@ -339,13 +339,6 @@
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gWn-bb-Efn">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <gestureRecognizers>
-                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="3kh-E6-oEn">
-                                        <connections>
-                                            <action selector="didClickOnCameraView:" target="XfG-lQ-9wD" id="d9h-f1-iq8"/>
-                                        </connections>
-                                    </clickGestureRecognizer>
-                                </gestureRecognizers>
                             </customView>
                         </subviews>
                         <constraints>
@@ -356,7 +349,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cameraView" destination="gWn-bb-Efn" id="IuT-zp-JlF"/>
+                        <outlet property="cameraView" destination="gWn-bb-Efn" id="KgW-0X-s4g"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -8,6 +8,5 @@
 import Foundation
 
 protocol WindowDelegate: AnyObject {
-    func toggleStyle()
     func didUpdateState()
 }

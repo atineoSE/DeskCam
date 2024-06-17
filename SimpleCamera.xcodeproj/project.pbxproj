@@ -17,6 +17,7 @@
 		3C26A2162B4D8B0600E58922 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2152B4D8B0600E58922 /* CameraViewController.swift */; };
 		3C26A21A2B4D9E5E00E58922 /* NSWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C26A2192B4D9E5E00E58922 /* NSWindow.swift */; };
 		3C654C8A2C206C8B00AA1BA1 /* WindowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C654C892C206C8B00AA1BA1 /* WindowDelegate.swift */; };
+		3C654C8E2C208D1F00AA1BA1 /* NSScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C654C8D2C208D1F00AA1BA1 /* NSScreen.swift */; };
 		3C8D13742C1B63E900ECCA04 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13732C1B63E900ECCA04 /* Position.swift */; };
 		3C8D13762C1B642D00ECCA04 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13752C1B642D00ECCA04 /* State.swift */; };
 		3C8D13782C1B64CF00ECCA04 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */; };
@@ -37,6 +38,7 @@
 		3C26A2192B4D9E5E00E58922 /* NSWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSWindow.swift; sourceTree = "<group>"; };
 		3C26A21D2B4EB24E00E58922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3C654C892C206C8B00AA1BA1 /* WindowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowDelegate.swift; sourceTree = "<group>"; };
+		3C654C8D2C208D1F00AA1BA1 /* NSScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScreen.swift; sourceTree = "<group>"; };
 		3C8D13732C1B63E900ECCA04 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		3C8D13752C1B642D00ECCA04 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				3C26A20C2B4D8ACA00E58922 /* Main.storyboard */,
 				3C26A2192B4D9E5E00E58922 /* NSWindow.swift */,
+				3C654C8D2C208D1F00AA1BA1 /* NSScreen.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				3C8D13742C1B63E900ECCA04 /* Position.swift in Sources */,
 				3C8D13782C1B64CF00ECCA04 /* AppSettings.swift in Sources */,
 				3C8D137A2C1B683A00ECCA04 /* AppLogger.swift in Sources */,
+				3C654C8E2C208D1F00AA1BA1 /* NSScreen.swift in Sources */,
 				3C1DF5E92C1B6265002F27E7 /* Mask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

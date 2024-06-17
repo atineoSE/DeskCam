@@ -14,7 +14,7 @@ enum Size: String, Codable, CaseIterable {
 }
 
 extension Size {
-    func getSize(over totalSize: CGSize) -> CGSize {
+    func size(over totalSize: CGSize) -> CGSize {
         let baseHeight = totalSize.height
         switch self {
         case .small:

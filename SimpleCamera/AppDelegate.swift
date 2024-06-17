@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         window = NSWindow(contentViewController: cameraViewController)
         window?.makeKeyAndOrderFront(self)
-        window?.setTransparency()
+        window?.setup()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -52,11 +52,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 extension AppDelegate: WindowDelegate {
-    func toggleStyle() {
-        window?.toggleStyle()
-    }
-    
     func didUpdateState() {
-        window?.update(with: stateController.currentState)
+        guard let screenSize = NSScreen.screenSize else {
+            return
+        }
+        let rect = stateController.currentState.rect(from: screenSize)
+        window?.update(with: rect)
+        cameraViewController.configure(
+            mask: stateController.currentState.mask,
+            in: rect
+        )
     }
 }

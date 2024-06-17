@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 struct State: Codable {
     let mask: Mask
@@ -15,4 +16,10 @@ struct State: Codable {
 
 extension State {
     static let `default` = State(mask: .circle, size: .small, position: .bottomLeft)
+    
+    func rect(from totalSize: CGSize) -> CGRect {
+        let size = size.size(over: totalSize)
+        let origin = position.origin(targetSize: size, totalSize: totalSize)
+        return NSRect(origin: origin, size: size)
+    }
 }

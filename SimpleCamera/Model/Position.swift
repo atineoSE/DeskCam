@@ -16,7 +16,7 @@ enum Position: String, Codable, CaseIterable {
 }
 
 extension Position {
-    func getOrigin(targetSize: CGSize, totalSize: CGSize) -> CGPoint {
+    func origin(targetSize: CGSize, totalSize: CGSize) -> CGPoint {
         let margin = totalSize.height / 50.0
         switch self {
         case .bottomLeft:

@@ -16,7 +16,6 @@ class CameraViewController: NSViewController {
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     @IBOutlet weak var cameraView: NSView!
-    private var isUsingCircleMask: Bool = false
     weak var windowDelegate: WindowDelegate?
     
     override func viewDidLoad() {
@@ -31,18 +30,8 @@ class CameraViewController: NSViewController {
     
     override func viewDidLayout() {
         super.viewDidLayout()
-        updateLayers()
         windowDelegate?.didUpdateState()
-    }
-    
-    @IBAction func didClickOnCameraView(_ sender: Any) {
-        print("CAMERA VIEW CONTROLLER: did click on camera view - toggle mask and window style")
-        windowDelegate?.toggleStyle()
-        toggleMask()
-    }
-    
-    func dummyFunc() {
-        print("dummyFunc")
+        updateLayers()
     }
     
     private func setupAVCapture() {
@@ -114,19 +103,17 @@ class CameraViewController: NSViewController {
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
         cameraLayer.connection?.isVideoMirrored = true
     }
-    
-    private func toggleMask() {
+}
+
+extension CameraViewController {
+    func configure(mask: Mask, in rect: CGRect) {
         let shapeLayer = CAShapeLayer()
-        shapeLayer.frame = cameraView.bounds
-        isUsingCircleMask.toggle()
-        shapeLayer.path = isUsingCircleMask ?
-            CGPath(ellipseIn: cameraView.bounds, transform: nil) :
-            CGPath(rect: cameraView.bounds, transform: nil)
+        shapeLayer.frame = rect
+        shapeLayer.path = mask.path(in: rect)
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
     }
 }
-
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
