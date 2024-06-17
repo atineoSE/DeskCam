@@ -11,6 +11,7 @@ class AppSettings {
     enum Key: String {
         case stateOne
         case stateTwo
+        case isFirst
     }
     
     private static let encoder = JSONEncoder()
@@ -34,6 +35,14 @@ class AppSettings {
             return nil
         }
         return try? decoder.decode(State.self, from: data)
+    }
+    
+    class func isCurrentStateSecond() -> Bool {
+        !UserDefaults.standard.bool(forKey: Key.isFirst.rawValue)
+    }
+    
+    class func setCurrentState(isFirst: Bool) {
+        UserDefaults.standard.setValue(isFirst, forKey: Key.isFirst.rawValue)
     }
     
     class func removeAllStates() {

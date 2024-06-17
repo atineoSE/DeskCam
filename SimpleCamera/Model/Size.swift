@@ -12,3 +12,17 @@ enum Size: String, Codable, CaseIterable {
     case medium = "Medium"
     case full = "Full screen"
 }
+
+extension Size {
+    func getSize(over totalSize: CGSize) -> CGSize {
+        let baseHeight = totalSize.height
+        switch self {
+        case .small:
+            return CGSize(width: baseHeight/4.0, height: baseHeight/4.0)
+        case .medium:
+            return CGSize(width: baseHeight/3.0, height: baseHeight/3.0)
+        case .full:
+            return CGSize(width: totalSize.width, height: baseHeight)
+        }
+    }
+}

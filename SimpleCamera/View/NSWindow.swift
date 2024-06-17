@@ -8,6 +8,10 @@
 import AppKit
 
 extension NSWindow {
+    private var screenSize: CGSize? {
+        NSScreen.main?.visibleFrame.size
+    }
+    
     func toggleStyle() {
         if styleMask == .borderless {
             styleMask = [.titled, .resizable]
@@ -22,5 +26,17 @@ extension NSWindow {
     
     func setTransparency() {
         backgroundColor = .clear
+    }
+    
+    func update(with state: State) {
+        guard let screenSize = screenSize else {
+            AppLogger.error("NSWINDOW: Could not find current screen")
+            return
+        }
+        let size = state.size.getSize(over: screenSize)
+        let origin = state.position.getOrigin(targetSize: size, totalSize: screenSize)
+        let rect = NSRect(origin: origin, size: size)
+        setFrame(rect, display: true)
+        AppLogger.debug("NSWINDOW: Updated window frame to \(rect) inside \(screenSize)")
     }
 }

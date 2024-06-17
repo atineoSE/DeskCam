@@ -10,7 +10,7 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow?
-    let stateController = StateController()
+    var stateController: StateController!
     var cameraViewController: CameraViewController!
     
     private var mainStoryboard: NSStoryboard {
@@ -22,15 +22,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-//        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
-//                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
-//                              backing: .buffered,
-//                              defer: false)
-//        window.contentViewController = initialViewController
-        
-        cameraViewController = mainStoryboard.instantiateController(withIdentifier: "CameraViewController") as! CameraViewController
+        cameraViewController = (mainStoryboard.instantiateController(withIdentifier: "CameraViewController") as! CameraViewController)
         cameraViewController.windowDelegate = self
-        cameraViewController.stateController = stateController
+        
+        stateController = StateController(delegate: self)
         
         window = NSWindow(contentViewController: cameraViewController)
         window?.makeKeyAndOrderFront(self)
@@ -52,11 +47,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func didToggleView(_ sender: Any) {
         print("APP DELEGATE: toggled view")
+        stateController.toggleState()
     }
 }
 
 extension AppDelegate: WindowDelegate {
     func toggleStyle() {
         window?.toggleStyle()
+    }
+    
+    func didUpdateState() {
+        window?.update(with: stateController.currentState)
     }
 }

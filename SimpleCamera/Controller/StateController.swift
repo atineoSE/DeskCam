@@ -8,9 +8,21 @@
 import Foundation
 
 class StateController {
-    var states: [State]
+    private(set) var states: [State]
+    private var isFirst: Bool
+    private weak var delegate: WindowDelegate?
     
-    init() {
+    private var currentIndex: Int {
+        isFirst ? 0 : 1
+    }
+    
+    var currentState: State {
+        states[currentIndex]
+    }
+    
+    init(delegate: WindowDelegate) {
+        self.delegate = delegate
+        isFirst = !AppSettings.isCurrentStateSecond()
         states = [
             AppSettings.getState(isFirst: true) ?? State.default,
             AppSettings.getState(isFirst: false) ?? State.default
@@ -19,17 +31,31 @@ class StateController {
     }
     
     func update(_ mask: Mask, isFirst:Bool) {
-        let index = isFirst ? 0 : 1
-        states[index] = State(mask: mask, size: states[index].size, position: states[index].position)
+        states[currentIndex] = State(mask: mask, size: currentState.size, position: currentState.position)
+        save()
+        delegate?.didUpdateState()
     }
     
     func update(_ position: Position, isFirst: Bool) {
-        let index = isFirst ? 0 : 1
-        states[index] = State(mask: states[index].mask, size: states[index].size, position: position)
+        states[currentIndex] = State(mask: currentState.mask, size: currentState.size, position: position)
+        save()
+        delegate?.didUpdateState()
     }
     
     func update(_ size: Size, isFirst: Bool) {
-        let index = isFirst ? 0 : 1
-        states[index] = State(mask: states[index].mask, size: size, position: states[index].position)
+        states[currentIndex] = State(mask: currentState.mask, size: size, position: currentState.position)
+        save()
+        delegate?.didUpdateState()
+    }
+    
+    func toggleState() {
+        isFirst.toggle()
+        AppSettings.setCurrentState(isFirst: isFirst)
+        delegate?.didUpdateState()
+    }
+    
+    private func save() {
+        AppSettings.saveState(states[0], isFirst: true)
+        AppSettings.saveState(states[1], isFirst: false)
     }
 }

@@ -241,12 +241,12 @@
                                                     </popUpButton>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l" userLabel="Size Button One">
                                                         <rect key="frame" x="-3" y="24" width="66" height="25"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="OJX-LP-YN3" id="6km-Da-zjO">
+                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="OJX-LP-YN3" id="6km-Da-zjO">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="K9H-3Y-Y39">
                                                                 <items>
-                                                                    <menuItem title="Item" id="OJX-LP-YN3"/>
+                                                                    <menuItem title="Item" state="on" id="OJX-LP-YN3"/>
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
@@ -256,12 +256,12 @@
                                                     </popUpButton>
                                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr" userLabel="Position Button One">
                                                         <rect key="frame" x="-3" y="-4" width="66" height="25"/>
-                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="27J-bX-j9F" id="UhW-8v-5Mq">
+                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="27J-bX-j9F" id="UhW-8v-5Mq">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="8J3-P5-e64">
                                                                 <items>
-                                                                    <menuItem title="Item" id="27J-bX-j9F"/>
+                                                                    <menuItem title="Item" state="on" id="27J-bX-j9F"/>
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>

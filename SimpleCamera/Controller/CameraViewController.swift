@@ -18,7 +18,6 @@ class CameraViewController: NSViewController {
     @IBOutlet weak var cameraView: NSView!
     private var isUsingCircleMask: Bool = false
     weak var windowDelegate: WindowDelegate?
-    weak var stateController: StateController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +27,7 @@ class CameraViewController: NSViewController {
         print("CAMERA VIEW CONTROLLER: set up layers")
         session.startRunning()
         print("CAMERA VIEW CONTROLLER: started session")
+        windowDelegate?.didUpdateState()
     }
     
     override func viewDidLayout() {
@@ -126,6 +126,7 @@ class CameraViewController: NSViewController {
         cameraView.layer?.backgroundColor = .clear
     }
 }
+
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
