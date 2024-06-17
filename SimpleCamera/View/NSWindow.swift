@@ -9,7 +9,12 @@ import AppKit
 
 extension NSWindow {
     private var screenSize: CGSize? {
-        NSScreen.main?.visibleFrame.size
+        NSScreen
+            .screens
+            .sorted(by: { $0.visibleFrame.size.width < $1.visibleFrame.size.width } )
+            .first?
+            .visibleFrame
+            .size
     }
     
     func toggleStyle() {
