@@ -10,7 +10,7 @@ import Foundation
 class StateController {
     private(set) var states: [State]
     private var isFirst: Bool
-    private weak var delegate: WindowDelegate?
+    private weak var delegate: StateControllerDelegate?
     
     private var currentIndex: Int {
         isFirst ? 0 : 1
@@ -20,7 +20,7 @@ class StateController {
         states[currentIndex]
     }
     
-    init(delegate: WindowDelegate) {
+    init(delegate: StateControllerDelegate) {
         self.delegate = delegate
         isFirst = !AppSettings.isCurrentStateSecond()
         states = [
@@ -33,25 +33,25 @@ class StateController {
     func update(_ mask: Mask, isFirst:Bool) {
         states[currentIndex] = State(mask: mask, size: currentState.size, position: currentState.position)
         save()
-        delegate?.didUpdateState()
+        delegate?.updateStateIfNeeded()
     }
     
     func update(_ position: Position, isFirst: Bool) {
         states[currentIndex] = State(mask: currentState.mask, size: currentState.size, position: position)
         save()
-        delegate?.didUpdateState()
+        delegate?.updateStateIfNeeded()
     }
     
     func update(_ size: Size, isFirst: Bool) {
         states[currentIndex] = State(mask: currentState.mask, size: size, position: currentState.position)
         save()
-        delegate?.didUpdateState()
+        delegate?.updateStateIfNeeded()
     }
     
     func toggleState() {
         isFirst.toggle()
         AppSettings.setCurrentState(isFirst: isFirst)
-        delegate?.didUpdateState()
+        delegate?.updateStateIfNeeded()
     }
     
     private func save() {

@@ -8,6 +8,10 @@
 import AppKit
 
 extension NSWindow {
+    static var currentWindow: NSWindow? {
+        NSApplication.shared.windows.first
+    }
+    
     func setup() {
         styleMask = .borderless
         level = .floating

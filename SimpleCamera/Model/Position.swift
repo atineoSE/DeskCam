@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Position: String, Codable, CaseIterable {
+enum Position: String, Codable, CaseIterable, Equatable {
     case topLeft = "Top left"
     case topRight = "Top right"
     case center = "Center"

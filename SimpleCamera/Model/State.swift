@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-struct State: Codable {
+struct State: Codable, Equatable {
     let mask: Mask
     let size: Size
     let position: Position

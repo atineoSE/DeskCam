@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Size: String, Codable, CaseIterable {
+enum Size: String, Codable, CaseIterable, Equatable {
     case small = "Small"
     case medium = "Medium"
     case full = "Full screen"

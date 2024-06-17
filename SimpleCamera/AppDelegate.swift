@@ -23,9 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         cameraViewController = (mainStoryboard.instantiateController(withIdentifier: "CameraViewController") as! CameraViewController)
-        cameraViewController.windowDelegate = self
-        
-        stateController = StateController(delegate: self)
+        stateController = StateController(delegate: cameraViewController)
+        cameraViewController.stateController = stateController
         
         window = NSWindow(contentViewController: cameraViewController)
         window?.makeKeyAndOrderFront(self)
@@ -46,21 +45,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func didToggleView(_ sender: Any) {
-        print("APP DELEGATE: toggled view")
+        print("APP DELEGATE: toggled view from menu button or shortcut")
         stateController.toggleState()
     }
 }
 
-extension AppDelegate: WindowDelegate {
-    func didUpdateState() {
-        guard let screenSize = NSScreen.screenSize else {
-            return
-        }
-        let rect = stateController.currentState.rect(from: screenSize)
-        window?.update(with: rect)
-        cameraViewController.configure(
-            mask: stateController.currentState.mask,
-            in: rect
-        )
-    }
-}

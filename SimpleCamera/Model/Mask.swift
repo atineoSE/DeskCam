@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-enum Mask: String, Codable, CaseIterable {
+enum Mask: String, Codable, CaseIterable, Equatable {
     case circle = "Cirle"
     case roundedRectangle = "Rounded rectangle"
     case square = "Square"

@@ -16,7 +16,8 @@ class CameraViewController: NSViewController {
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     @IBOutlet weak var cameraView: NSView!
-    weak var windowDelegate: WindowDelegate?
+    weak var stateController: StateController?
+    private var currentState: State?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class CameraViewController: NSViewController {
     
     override func viewDidLayout() {
         super.viewDidLayout()
-        windowDelegate?.didUpdateState()
+        updateStateIfNeeded()
         updateLayers()
     }
     
@@ -103,15 +104,41 @@ class CameraViewController: NSViewController {
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
         cameraLayer.connection?.isVideoMirrored = true
     }
-}
-
-extension CameraViewController {
-    func configure(mask: Mask, in rect: CGRect) {
+    
+    private func configure(mask: Mask, in rect: CGRect) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = rect
         shapeLayer.path = mask.path(in: rect)
+        cameraView.bounds = rect
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
+    }
+}
+
+extension CameraViewController: StateControllerDelegate {
+    func updateStateIfNeeded() {
+        guard 
+            let stateController = stateController,
+            currentState != stateController.currentState
+        else {
+            // Nothing to update
+            return
+        }
+        guard
+            let window = NSWindow.currentWindow,
+            let screenSize = NSScreen.screenSize
+        else {
+            AppLogger.error("CAMERA_VIEW_CONTROLLER: Can't update view")
+            return
+        }
+        AppLogger.debug(
+            "CAMERA_VIEW_CONTROLLER: Update view with screen size \(screenSize) to state \(String(describing: currentState))"
+        )
+        let currentState = stateController.currentState
+        let rect = currentState.rect(from: screenSize)
+        window.update(with: rect)
+        configure(mask: currentState.mask, in: rect)
+        self.currentState = currentState
     }
 }
 
