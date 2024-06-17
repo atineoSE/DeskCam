@@ -27,12 +27,12 @@ class CameraViewController: NSViewController {
         print("CAMERA VIEW CONTROLLER: set up layers")
         session.startRunning()
         print("CAMERA VIEW CONTROLLER: started session")
-        windowDelegate?.didUpdateState()
     }
     
     override func viewDidLayout() {
         super.viewDidLayout()
         updateLayers()
+        windowDelegate?.didUpdateState()
     }
     
     @IBAction func didClickOnCameraView(_ sender: Any) {

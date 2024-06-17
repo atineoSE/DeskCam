@@ -34,7 +34,7 @@ class ConfigViewController: NSViewController {
         else {
             return
         }
-        AppLogger.debug("Position one changed to \(newPosition)")
+        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Position one changed to \(newPosition)")
         stateController?.update(newPosition, isFirst: true)
     }
     
@@ -46,7 +46,7 @@ class ConfigViewController: NSViewController {
         else {
             return
         }
-        AppLogger.debug("Mask one changed to \(newMask)")
+        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Mask one changed to \(newMask)")
         stateController?.update(newMask, isFirst: true)
     }
     
@@ -58,7 +58,7 @@ class ConfigViewController: NSViewController {
         else {
             return
         }
-        AppLogger.debug("Size one changed to \(newSize)")
+        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Size one changed to \(newSize)")
         stateController?.update(newSize, isFirst: true)
     }
     
