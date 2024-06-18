@@ -7,6 +7,7 @@
 
 import AppKit
 import AVFoundation
+import Vision
 
 class CameraViewController: NSViewController {
     private var cameraLayer: AVCaptureVideoPreviewLayer?
@@ -32,7 +33,11 @@ class CameraViewController: NSViewController {
         super.viewWillAppear()
         refresh()
     }
-    
+}
+
+// MARK: - Setup
+
+extension CameraViewController {
     private func setupAVCapture() {
         var deviceInput: AVCaptureDeviceInput!
         
@@ -90,7 +95,11 @@ class CameraViewController: NSViewController {
         cameraView.wantsLayer = true
         cameraView.layer = cameraLayer
     }
-    
+}
+
+// MARK: - State
+
+extension CameraViewController {
     private func configure(mask: Mask) {
         // We set the layer rects relative to the container view, cameraView
         let viewRect = cameraView.bounds
@@ -126,10 +135,18 @@ class CameraViewController: NSViewController {
     }
 }
 
+// MARK: - StateControllerDelegate
+
 extension CameraViewController: StateControllerDelegate {
     func updateState() {
         refresh()
     }
+}
+
+// MARK: - Vision
+
+extension CameraViewController {
+    
 }
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
