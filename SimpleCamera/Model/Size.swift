@@ -10,6 +10,7 @@ import Foundation
 enum Size: String, Codable, CaseIterable, Equatable {
     case small = "Small"
     case medium = "Medium"
+    case large = "Large"
     case full = "Full screen"
 }
 
@@ -21,6 +22,8 @@ extension Size {
             return CGSize(width: floor(baseHeight/4.0), height: floor(baseHeight/4.0))
         case .medium:
             return CGSize(width: floor(baseHeight/3.0), height: floor(baseHeight/3.0))
+        case .large:
+            return CGSize(width: floor(baseHeight * 0.8), height: floor(baseHeight * 0.8))
         case .full:
             return CGSize(width: totalSize.width, height: baseHeight)
         }
