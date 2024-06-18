@@ -184,15 +184,12 @@ extension CameraViewController {
             }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.segmentedView.image = NSImage(named: "pardito")
-                /*
-                let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
+                //let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
                 let imageRect = self.cameraView.bounds
                 let blackBackground = CIImage(color: .black).cropped(to: imageRect)
                 if let maskCGImage = ciContext.createCGImage(blackBackground, from: imageRect) {
                     self.segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
                 }
-                 */
                 /*
                 if let maskCGImage = ciContext.createCGImage(maskCIImage.composited(over: blackBackground), from: imageRect) {
                     guard let self = self else { return }
