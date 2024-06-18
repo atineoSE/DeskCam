@@ -15,6 +15,8 @@ class CameraViewController: NSViewController {
     private let session = AVCaptureSession()
     private var videoDataOutput = AVCaptureVideoDataOutput()
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    private let ciContext = CIContext()
+    private var segmentedView = NSImageView()
     
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
@@ -108,15 +110,32 @@ extension CameraViewController {
 
 extension CameraViewController {
     private func configure(mask: Mask) {
+        guard mask != .segmented else {
+            // Add segmentedView to view hierarchy
+            cameraView.layer = nil
+            cameraView.addSubview(segmentedView)
+            return
+        }
+        
+        // Reset view hierarchy
+        for subview in cameraView.subviews {
+            subview.removeFromSuperview()
+        }
+        cameraView.layer = cameraLayer
+        
         // We set the layer rects relative to the container view, cameraView
         let viewRect = cameraView.bounds
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = viewRect
         shapeLayer.path = mask.path(in: viewRect)
+        
+        // Apply mask
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
         cameraLayer?.frame = viewRect
+        
         print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
+        return
     }
     
     private func updateWindow() {
@@ -135,10 +154,11 @@ extension CameraViewController {
     
     private func refresh() {
         AppLogger.debug("CAMERA_VIEW_CONTROLLER: Refresh")
-        updateWindow()
-        if let mask = stateController?.currentState.mask {
-            configure(mask: mask)
+        guard let currentState = stateController?.currentState else {
+            return
         }
+        updateWindow()
+        configure(mask: currentState.mask)
     }
 }
 
@@ -162,7 +182,14 @@ extension CameraViewController {
                 return
             }
             let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
-            AppLogger.debug("CAMERA_VIEW_CONTROLLER: got mask")
+            let imageRect = cameraView.bounds
+            let blackBackground = CIImage(color: .black).cropped(to: imageRect)
+            if let maskCGImage = ciContext.createCGImage(maskCIImage.composited(over: blackBackground), from: imageRect) {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
+                }
+            }
         } catch let error as NSError {
             AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to perform segmentation request with error \(error.localizedDescription)")
         }
