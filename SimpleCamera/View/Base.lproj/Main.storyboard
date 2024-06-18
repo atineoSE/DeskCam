@@ -393,6 +393,9 @@
                                                                                 </items>
                                                                             </menu>
                                                                         </popUpButtonCell>
+                                                                        <connections>
+                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="Qo3-az-QEX"/>
+                                                                        </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="SizeTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l" userLabel="Size Button Two">
                                                                         <rect key="frame" x="-3" y="24" width="66" height="25"/>
@@ -405,6 +408,9 @@
                                                                                 </items>
                                                                             </menu>
                                                                         </popUpButtonCell>
+                                                                        <connections>
+                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="WeD-d7-cmA"/>
+                                                                        </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="PositionTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr" userLabel="Position Button Two">
                                                                         <rect key="frame" x="-3" y="-4" width="66" height="25"/>
@@ -417,6 +423,9 @@
                                                                                 </items>
                                                                             </menu>
                                                                         </popUpButtonCell>
+                                                                        <connections>
+                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="XTH-Vt-Zht"/>
+                                                                        </connections>
                                                                     </popUpButton>
                                                                 </subviews>
                                                                 <visibilityPriorities>

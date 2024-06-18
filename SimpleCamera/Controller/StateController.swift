@@ -44,6 +44,7 @@ class StateController {
     
     func toggleState() {
         currentIndex = (currentIndex + 1) % states.count
+        AppLogger.debug("STATE_CONTROLLER: updated state to \(currentState)")
         AppSettings.setCurrentState(at: currentIndex)
         delegate?.updateState()
     }
@@ -53,6 +54,7 @@ class StateController {
         if index == currentIndex {
             delegate?.updateState()
         }
+        AppLogger.debug("STATE_CONTROLLER: updated state at \(index) to \(states[index])")
     }
     
     private func save() {
