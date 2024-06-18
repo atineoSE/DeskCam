@@ -9,7 +9,7 @@ import Foundation
 
 class StateController {
     private(set) var states: [State]
-    private var currentIndex: Int
+    private(set) var currentIndex: Int
     private weak var delegate: StateControllerDelegate?
     
     var currentState: State {

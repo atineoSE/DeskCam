@@ -9,11 +9,13 @@ import Cocoa
 
 class ConfigViewController: NSViewController {
     
+    @IBOutlet weak var labelViewOne: NSTextField!
     @IBOutlet weak var backgroundViewOne: NSView!
     @IBOutlet weak var positionButtonOne: NSPopUpButton!
     @IBOutlet weak var maskButtonOne: NSPopUpButton!
     @IBOutlet weak var sizeButtonOne: NSPopUpButton!
     
+    @IBOutlet weak var labelViewTwo: NSTextField!
     @IBOutlet weak var backgroundViewTwo: NSView!
     @IBOutlet weak var positionButtonTwo: NSPopUpButton!
     @IBOutlet weak var maskButtonTwo: NSPopUpButton!
@@ -26,6 +28,7 @@ class ConfigViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupLabels()
         setupBackgroundViews()
         setupPopUpButtons()
     }
@@ -67,6 +70,18 @@ class ConfigViewController: NSViewController {
             AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
             return
         }
+    }
+    
+    func update() {
+        setupLabels()
+    }
+    
+    private func setupLabels() {
+        guard let currentIndex = stateController?.currentIndex else {
+            return
+        }
+        labelViewOne.stringValue = "View 1" + (currentIndex == 0 ? " (active)" : "")
+        labelViewTwo.stringValue = "View 2" + (currentIndex == 1 ? " (active)" : "")
     }
     
     private func setupBackgroundViews() {

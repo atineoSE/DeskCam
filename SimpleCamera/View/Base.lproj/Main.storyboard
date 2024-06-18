@@ -479,6 +479,8 @@
                     <connections>
                         <outlet property="backgroundViewOne" destination="GwH-yT-Uhv" id="4F9-BM-f3G"/>
                         <outlet property="backgroundViewTwo" destination="M20-Hl-1wm" id="Fbc-1o-2D1"/>
+                        <outlet property="labelViewOne" destination="S8b-UA-G08" id="zGV-Lb-dpS"/>
+                        <outlet property="labelViewTwo" destination="vdQ-ue-frY" id="9XY-fv-qeV"/>
                         <outlet property="maskButtonOne" destination="stG-sM-2i3" id="X9E-1a-dfT"/>
                         <outlet property="maskButtonTwo" destination="GJ3-ys-L6B" id="qCl-AI-euw"/>
                         <outlet property="positionButtonOne" destination="BEG-7d-lSi" id="kpB-Ak-qPo"/>
