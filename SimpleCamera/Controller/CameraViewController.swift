@@ -17,7 +17,11 @@ class CameraViewController: NSViewController {
     
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
-    private var currentState: State?
+    private var currentState: State? {
+        didSet {
+            view.layer?.setNeedsLayout()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +36,6 @@ class CameraViewController: NSViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         updateStateIfNeeded()
-        updateLayers()
     }
     
     private func setupAVCapture() {
@@ -85,33 +88,23 @@ class CameraViewController: NSViewController {
     
     private func setupLayers() {
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
+        cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
+        cameraLayer.connection?.isVideoMirrored = true
         self.cameraLayer = cameraLayer
         cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         cameraView.wantsLayer = true
         cameraView.layer = cameraLayer
     }
     
-    private func updateLayers() {
-        guard let cameraLayer = cameraLayer else {
-            print("CAMERA VIEW CONTROLLER: ERROR - can't update layer")
-            return
-        }
-        // Configure layer
-        cameraLayer.frame = cameraView.bounds
-        print("CAMERA VIEW CONTROLLER: Updated layer frame to \(cameraView.bounds)")
-        
-        // Set video as mirrored
-        cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
-        cameraLayer.connection?.isVideoMirrored = true
-    }
-    
     private func configure(mask: Mask, in rect: CGRect) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = rect
         shapeLayer.path = mask.path(in: rect)
-        cameraView.bounds = rect
+        //cameraView.bounds = rect
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
+        cameraLayer.frame = rect
+        print("CAMERA VIEW CONTROLLER: Updated layer frame to \(rect)")
     }
 }
 
@@ -124,6 +117,7 @@ extension CameraViewController: StateControllerDelegate {
             // Nothing to update
             return
         }
+        
         guard
             let window = NSWindow.currentWindow,
             let screenSize = NSScreen.screenSize
@@ -131,11 +125,13 @@ extension CameraViewController: StateControllerDelegate {
             AppLogger.error("CAMERA_VIEW_CONTROLLER: Can't update view")
             return
         }
-        AppLogger.debug(
-            "CAMERA_VIEW_CONTROLLER: Update view with screen size \(screenSize) to state \(String(describing: currentState))"
-        )
+
         let currentState = stateController.currentState
+        AppLogger.debug("CAMERA_VIEW_CONTROLLER: Update view with screen size \(screenSize) to state \(currentState)")
+        
         let rect = currentState.rect(from: screenSize)
+        AppLogger.debug("CAMERA_VIEW_CONTROLLER: got rect \(rect) for state \(currentState)")
+        
         window.update(with: rect)
         configure(mask: currentState.mask, in: rect)
         self.currentState = currentState
