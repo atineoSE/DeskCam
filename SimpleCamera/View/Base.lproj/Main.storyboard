@@ -173,34 +173,34 @@
             <objects>
                 <viewController title="Config view" storyboardIdentifier="ConfigViewController" id="9L6-US-oCV" customClass="ConfigViewController" customModule="DeskCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="u4s-z9-d1U">
-                        <rect key="frame" x="0.0" y="0.0" width="1001" height="241"/>
+                        <rect key="frame" x="0.0" y="0.0" width="462" height="264"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7D-B7-9JJ">
-                                <rect key="frame" x="0.0" y="0.0" width="1001" height="241"/>
+                            <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7D-B7-9JJ">
+                                <rect key="frame" x="8" y="8" width="446" height="248"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jeE-TC-spC">
-                                        <rect key="frame" x="0.0" y="27" width="559" height="188"/>
+                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jeE-TC-spC">
+                                        <rect key="frame" x="0.0" y="30" width="211" height="188"/>
                                         <subviews>
-                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-UA-G08">
-                                                <rect key="frame" x="258" y="172" width="43" height="16"/>
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-UA-G08">
+                                                <rect key="frame" x="84" y="172" width="43" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="View 1" id="x7K-IV-uWy">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GwH-yT-Uhv" userLabel="CardView">
-                                                <rect key="frame" x="63" y="0.0" width="434" height="164"/>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="GwH-yT-Uhv" userLabel="CardView">
+                                                <rect key="frame" x="35" y="0.0" width="142" height="164"/>
                                                 <subviews>
                                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnU-Cv-3N8">
-                                                        <rect key="frame" x="8" y="8" width="418" height="148"/>
+                                                        <rect key="frame" x="8" y="8" width="126" height="148"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Fx-gb-qLU">
-                                                                <rect key="frame" x="0.0" y="38" width="205" height="72"/>
+                                                                <rect key="frame" x="0.0" y="38" width="59" height="72"/>
                                                                 <subviews>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BaH-L9-ho9">
-                                                                        <rect key="frame" x="154" y="56" width="53" height="16"/>
+                                                                        <rect key="frame" x="8" y="56" width="53" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Position" id="PkN-Yd-9x5">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -208,7 +208,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6H-gc-Gs7">
-                                                                        <rect key="frame" x="170" y="28" width="37" height="16"/>
+                                                                        <rect key="frame" x="24" y="28" width="37" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Mask" id="Fry-ER-aEW">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -216,7 +216,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kzc-tI-ltB">
-                                                                        <rect key="frame" x="177" y="0.0" width="30" height="16"/>
+                                                                        <rect key="frame" x="31" y="0.0" width="30" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Size" id="xOw-Bq-HC6">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -236,7 +236,7 @@
                                                                 </customSpacing>
                                                             </stackView>
                                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rwr-O2-d2N">
-                                                                <rect key="frame" x="213" y="36" width="205" height="76"/>
+                                                                <rect key="frame" x="67" y="36" width="59" height="76"/>
                                                                 <subviews>
                                                                     <popUpButton identifier="MaskOne" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BEG-7d-lSi" userLabel="Mask Button One">
                                                                         <rect key="frame" x="-3" y="52" width="66" height="25"/>
@@ -323,28 +323,28 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eid-ZG-mp2">
-                                        <rect key="frame" x="567" y="27" width="434" height="188"/>
+                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eid-ZG-mp2">
+                                        <rect key="frame" x="219" y="30" width="227" height="188"/>
                                         <subviews>
-                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vdQ-ue-frY">
-                                                <rect key="frame" x="195" y="172" width="45" height="16"/>
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vdQ-ue-frY">
+                                                <rect key="frame" x="91" y="172" width="45" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="View 2" id="ZIj-b8-RlT">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M20-Hl-1wm" userLabel="CardView">
-                                                <rect key="frame" x="0.0" y="0.0" width="434" height="164"/>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="M20-Hl-1wm" userLabel="CardView">
+                                                <rect key="frame" x="0.0" y="0.0" width="227" height="164"/>
                                                 <subviews>
                                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="47u-MW-Wm7">
-                                                        <rect key="frame" x="8" y="8" width="418" height="148"/>
+                                                        <rect key="frame" x="8" y="8" width="211" height="148"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="isz-Sj-S01">
-                                                                <rect key="frame" x="0.0" y="38" width="205" height="72"/>
+                                                                <rect key="frame" x="0.0" y="38" width="102" height="72"/>
                                                                 <subviews>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97f-sv-eI6">
-                                                                        <rect key="frame" x="154" y="56" width="53" height="16"/>
+                                                                        <rect key="frame" x="51" y="56" width="53" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Position" id="uvr-7m-vtL">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -352,7 +352,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="efd-C6-5kU">
-                                                                        <rect key="frame" x="170" y="28" width="37" height="16"/>
+                                                                        <rect key="frame" x="67" y="28" width="37" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Mask" id="Iti-7M-uEw">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -360,7 +360,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-wO-Oiq">
-                                                                        <rect key="frame" x="177" y="0.0" width="30" height="16"/>
+                                                                        <rect key="frame" x="74" y="0.0" width="30" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Size" id="eQj-da-lo6">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -380,7 +380,7 @@
                                                                 </customSpacing>
                                                             </stackView>
                                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXq-OL-MMb">
-                                                                <rect key="frame" x="213" y="36" width="205" height="76"/>
+                                                                <rect key="frame" x="110" y="36" width="101" height="76"/>
                                                                 <subviews>
                                                                     <popUpButton identifier="MaskTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-ys-L6B" userLabel="Mask Button Two">
                                                                         <rect key="frame" x="-3" y="52" width="66" height="25"/>
@@ -470,10 +470,10 @@
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="h7D-B7-9JJ" firstAttribute="top" secondItem="u4s-z9-d1U" secondAttribute="top" id="Ghn-qK-uHd"/>
-                            <constraint firstAttribute="bottom" secondItem="h7D-B7-9JJ" secondAttribute="bottom" id="VhW-G4-CtJ"/>
-                            <constraint firstItem="h7D-B7-9JJ" firstAttribute="leading" secondItem="u4s-z9-d1U" secondAttribute="leading" id="e3p-21-iRV"/>
-                            <constraint firstAttribute="trailing" secondItem="h7D-B7-9JJ" secondAttribute="trailing" id="hcA-fY-JVW"/>
+                            <constraint firstAttribute="trailing" secondItem="h7D-B7-9JJ" secondAttribute="trailing" constant="8" id="47R-bj-Uga"/>
+                            <constraint firstAttribute="bottom" secondItem="h7D-B7-9JJ" secondAttribute="bottom" constant="8" id="6K8-WF-ONc"/>
+                            <constraint firstItem="h7D-B7-9JJ" firstAttribute="top" secondItem="u4s-z9-d1U" secondAttribute="top" constant="8" id="pX7-UA-b5G"/>
+                            <constraint firstItem="h7D-B7-9JJ" firstAttribute="leading" secondItem="u4s-z9-d1U" secondAttribute="leading" constant="8" id="yqZ-o1-wmp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -489,7 +489,7 @@
                 </viewController>
                 <customObject id="Zn9-EP-ADl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="898.5" y="297.5"/>
+            <point key="canvasLocation" x="1321" y="262"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="hIz-AP-VOD">
