@@ -17,11 +17,6 @@ class CameraViewController: NSViewController {
     
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
-    private var currentState: State? {
-        didSet {
-            view.layer?.setNeedsLayout()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +30,7 @@ class CameraViewController: NSViewController {
     
     override func viewDidLayout() {
         super.viewDidLayout()
-        updateStateIfNeeded()
+        refresh()
     }
     
     private func setupAVCapture() {
@@ -106,35 +101,31 @@ class CameraViewController: NSViewController {
         cameraLayer?.frame = viewRect
         print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
     }
+    
+    private func updateWindow() {
+        guard
+            let window = NSWindow.currentWindow,
+            let screenSize = NSScreen.screenSize,
+            let currentState = stateController?.currentState
+        else {
+            return
+        }
+        let windowRect = currentState.rect(from: screenSize)
+        window.update(with: windowRect)
+        AppLogger.debug("CAMERA_VIEW_CONTROLLER: Updated window with screen size \(screenSize) to \(windowRect) (state: \(currentState))")
+    }
+    
+    private func refresh() {
+        updateWindow()
+        if let mask = stateController?.currentState.mask {
+            configure(mask: mask)
+        }
+    }
 }
 
 extension CameraViewController: StateControllerDelegate {
     func updateStateIfNeeded() {
-        guard 
-            let stateController = stateController,
-            currentState != stateController.currentState
-        else {
-            // Nothing to update
-            return
-        }
-        
-        guard
-            let window = NSWindow.currentWindow,
-            let screenSize = NSScreen.screenSize
-        else {
-            AppLogger.error("CAMERA_VIEW_CONTROLLER: Can't update view")
-            return
-        }
-
-        let currentState = stateController.currentState
-        AppLogger.debug("CAMERA_VIEW_CONTROLLER: Update view with screen size \(screenSize) to state \(currentState)")
-        
-        let windowRect = currentState.rect(from: screenSize)
-        AppLogger.debug("CAMERA_VIEW_CONTROLLER: got rect \(windowRect) for state \(currentState)")
-        
-        window.update(with: windowRect)
-        configure(mask: currentState.mask)
-        self.currentState = currentState
+        refresh()
     }
 }
 
