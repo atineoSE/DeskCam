@@ -30,6 +30,8 @@ class CameraViewController: NSViewController {
     
     override func viewDidLayout() {
         super.viewDidLayout()
+        // There may be multiple layout passes, as the window changes and the views get updated.
+        // We need to keep refreshing until the view hierarchy stabilizes.
         refresh()
     }
     
@@ -92,6 +94,7 @@ class CameraViewController: NSViewController {
     }
     
     private func configure(mask: Mask) {
+        // We set the layer rects relative to the container view, cameraView
         let viewRect = cameraView.bounds
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = viewRect
@@ -110,6 +113,7 @@ class CameraViewController: NSViewController {
         else {
             return
         }
+        // We set the window rect relative to the screen size
         let windowRect = currentState.rect(from: screenSize)
         window.update(with: windowRect)
         AppLogger.debug("CAMERA_VIEW_CONTROLLER: Updated window with screen size \(screenSize) to \(windowRect) (state: \(currentState))")
