@@ -72,7 +72,8 @@ class ConfigViewController: NSViewController {
         }
     }
     
-    func update() {
+    @IBAction func didToggleView(_ sender: Any) {
+        stateController?.toggleState()
         setupLabels()
     }
     

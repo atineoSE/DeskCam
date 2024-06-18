@@ -67,7 +67,7 @@
                                         </menuItem>
                                         <menuItem title="Toggle view" keyEquivalent="t" id="GrK-0y-9I2">
                                             <connections>
-                                                <action selector="didToggleView:" target="Voe-Tx-rLC" id="duZ-u2-Ic9"/>
+                                                <action selector="didToggleView:" target="Ady-hI-5gd" id="zoO-uQ-X1y"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
@@ -500,7 +500,7 @@
                 </viewController>
                 <customObject id="Zn9-EP-ADl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1321" y="262"/>
+            <point key="canvasLocation" x="674" y="241"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="hIz-AP-VOD">

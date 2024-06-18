@@ -12,7 +12,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var window: NSWindow?
     private var stateController: StateController!
     private var cameraViewController: CameraViewController!
-    private weak var configViewController: ConfigViewController?
     
     private var mainStoryboard: NSStoryboard {
         return NSStoryboard(name: "Main", bundle: nil)
@@ -43,13 +42,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let configViewController = mainStoryboard.instantiateController(withIdentifier: "ConfigViewController") as! ConfigViewController
         configViewController.stateController = stateController
         cameraViewController.presentAsModalWindow(configViewController)
-        self.configViewController = configViewController
     }
     
     @IBAction func didToggleView(_ sender: Any) {
         print("APP DELEGATE: toggled view from menu button or shortcut")
         stateController.toggleState()
-        configViewController?.update()
     }
 }
 
