@@ -184,18 +184,12 @@ extension CameraViewController {
             }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                //let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
+                let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
                 let imageRect = self.cameraView.bounds
-                let blackBackground = CIImage(color: .black).cropped(to: imageRect)
-                if let maskCGImage = ciContext.createCGImage(blackBackground, from: imageRect) {
-                    self.segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
-                }
-                /*
-                if let maskCGImage = ciContext.createCGImage(maskCIImage.composited(over: blackBackground), from: imageRect) {
-                    guard let self = self else { return }
+                let background = CIImage(color: .white).cropped(to: imageRect)
+                if let maskCGImage = ciContext.createCGImage(maskCIImage.composited(over: background), from: imageRect) {
                     segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
                 }
-                 */
             }
         } catch let error as NSError {
             AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to perform segmentation request with error \(error.localizedDescription)")
