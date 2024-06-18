@@ -29,44 +29,44 @@ class ConfigViewController: NSViewController {
         setupBackgroundViews()
         setupPopUpButtons()
     }
+    
     @IBAction func didChangeButton(_ sender: NSPopUpButton) {
-        print("Changed \(sender.identifier) button to \(sender.selectedItem?.title) ")
-    }
-    
-    @objc
-    func positionDidChange(at button: NSPopUpButton, index: Int) {
-        guard
-            let positionTitle = button.selectedItem?.title,
-            let newPosition = Position(rawValue: positionTitle)
+        guard 
+            let id = sender.identifier?.rawValue,
+            let title = sender.selectedItem?.title
         else {
             return
         }
-        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Position changed to \(newPosition) at index \(index)")
-        stateController?.update(newPosition, at: index)
-    }
-    
-    @objc
-    func maskDidChange(at button: NSPopUpButton, index: Int) {
-        guard
-            let maskTitle = button.selectedItem?.title,
-            let newMask = Mask(rawValue: maskTitle)
-        else {
+        print("Change \(id) button to \(title)")
+        switch id {
+        case "MaskOne":
+            if let mask = Mask(rawValue: title) {
+                stateController?.update(mask, at: 0)
+            }
+        case "MaskTwo":
+            if let mask = Mask(rawValue: title) {
+                stateController?.update(mask, at: 1)
+            }
+        case "PositionOne":
+            if let position = Position(rawValue: title) {
+                stateController?.update(position, at: 0)
+            }
+        case "PositionTwo":
+            if let position = Position(rawValue: title) {
+                stateController?.update(position, at: 1)
+            }
+        case "SizeOne":
+            if let size = Size(rawValue: title) {
+                stateController?.update(size, at: 0)
+            }
+        case "SizeTwo":
+            if let size = Size(rawValue: title) {
+                stateController?.update(size, at: 1)
+            }
+        default:
+            AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
             return
         }
-        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Mask one changed to \(newMask) at index \(index)")
-        stateController?.update(newMask, at: index)
-    }
-    
-    @objc
-    func sizeOneDidChange(at button: NSPopUpButton, index: Int) {
-        guard
-            let sizeTitle = button.selectedItem?.title,
-            let newSize = Size(rawValue: sizeTitle)
-        else {
-            return
-        }
-        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Size changed to \(newSize) at index \(index)")
-        stateController?.update(newSize, at: index)
     }
     
     private func setupBackgroundViews() {
