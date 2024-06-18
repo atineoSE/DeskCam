@@ -28,10 +28,8 @@ class CameraViewController: NSViewController {
         print("CAMERA VIEW CONTROLLER: started session")
     }
     
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        // There may be multiple layout passes, as the window changes and the views get updated.
-        // We need to keep refreshing until the view hierarchy stabilizes.
+    override func viewWillAppear() {
+        super.viewWillAppear()
         refresh()
     }
     
@@ -120,6 +118,7 @@ class CameraViewController: NSViewController {
     }
     
     private func refresh() {
+        AppLogger.debug("CAMERA_VIEW_CONTROLLER: Refresh")
         updateWindow()
         if let mask = stateController?.currentState.mask {
             configure(mask: mask)
