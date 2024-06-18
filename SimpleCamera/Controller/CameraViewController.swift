@@ -41,6 +41,10 @@ class CameraViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         refresh()
+        
+        cameraView.addSubview(segmentedView)
+        segmentedView.image = NSImage(named: "pardito")
+        segmentedView.frame = cameraView.bounds
     }
 }
 
@@ -158,7 +162,7 @@ extension CameraViewController {
             return
         }
         updateWindow()
-        configure(mask: currentState.mask)
+        //configure(mask: currentState.mask)
     }
 }
 
@@ -181,14 +185,23 @@ extension CameraViewController {
                 AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to obtain a segmentation mask.")
                 return
             }
-            let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
-            let imageRect = cameraView.bounds
-            let blackBackground = CIImage(color: .black).cropped(to: imageRect)
-            if let maskCGImage = ciContext.createCGImage(maskCIImage.composited(over: blackBackground), from: imageRect) {
-                DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.segmentedView.image = NSImage(named: "pardito")
+                /*
+                let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
+                let imageRect = self.cameraView.bounds
+                let blackBackground = CIImage(color: .black).cropped(to: imageRect)
+                if let maskCGImage = ciContext.createCGImage(blackBackground, from: imageRect) {
+                    self.segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
+                }
+                 */
+                /*
+                if let maskCGImage = ciContext.createCGImage(maskCIImage.composited(over: blackBackground), from: imageRect) {
                     guard let self = self else { return }
                     segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
                 }
+                 */
             }
         } catch let error as NSError {
             AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to perform segmentation request with error \(error.localizedDescription)")
@@ -203,6 +216,6 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard stateController?.currentState.mask == .segmented else {
             return
         }
-        segment(buffer: sampleBuffer)
+        //segment(buffer: sampleBuffer)
     }
 }

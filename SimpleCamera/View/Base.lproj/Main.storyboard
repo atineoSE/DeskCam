@@ -507,11 +507,11 @@
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" id="XfG-lQ-9wD" customClass="CameraViewController" customModule="DeskCam" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="475" height="280"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="gWn-bb-Efn">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <rect key="frame" x="0.0" y="0.0" width="475" height="280"/>
                             </customView>
                         </subviews>
                         <constraints>
@@ -527,7 +527,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="722"/>
+            <point key="canvasLocation" x="72.5" y="787"/>
         </scene>
     </scenes>
 </document>
