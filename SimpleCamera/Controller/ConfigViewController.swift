@@ -73,9 +73,9 @@ class ConfigViewController: NSViewController {
     
     private func setupBackgroundViews() {
         for view in [backgroundViewOne, backgroundViewTwo] {
-            view.wantsLayer = true
-            view.layer?.backgroundColor = NSColor.darkGray.cgColor
-            view.layer?.cornerRadius = 16.0
+            view?.wantsLayer = true
+            view?.layer?.backgroundColor = NSColor.darkGray.cgColor
+            view?.layer?.cornerRadius = 16.0
         }
     }
     

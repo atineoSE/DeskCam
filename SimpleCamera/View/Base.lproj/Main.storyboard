@@ -393,9 +393,6 @@
                                                                                 </items>
                                                                             </menu>
                                                                         </popUpButtonCell>
-                                                                        <connections>
-                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="rbc-JL-sjY"/>
-                                                                        </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="SizeTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l" userLabel="Size Button Two">
                                                                         <rect key="frame" x="-3" y="24" width="66" height="25"/>
@@ -408,9 +405,6 @@
                                                                                 </items>
                                                                             </menu>
                                                                         </popUpButtonCell>
-                                                                        <connections>
-                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="kuy-RC-ldx"/>
-                                                                        </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="PositionTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr" userLabel="Position Button Two">
                                                                         <rect key="frame" x="-3" y="-4" width="66" height="25"/>
@@ -423,9 +417,6 @@
                                                                                 </items>
                                                                             </menu>
                                                                         </popUpButtonCell>
-                                                                        <connections>
-                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="ZbS-vT-vMR"/>
-                                                                        </connections>
                                                                     </popUpButton>
                                                                 </subviews>
                                                                 <visibilityPriorities>
@@ -488,11 +479,11 @@
                     <connections>
                         <outlet property="backgroundViewOne" destination="GwH-yT-Uhv" id="4F9-BM-f3G"/>
                         <outlet property="backgroundViewTwo" destination="M20-Hl-1wm" id="Fbc-1o-2D1"/>
-                        <outlet property="maskButtonOne" destination="H0T-wW-32l" id="Oyk-PG-qiC"/>
+                        <outlet property="maskButtonOne" destination="stG-sM-2i3" id="X9E-1a-dfT"/>
                         <outlet property="maskButtonTwo" destination="GJ3-ys-L6B" id="qCl-AI-euw"/>
-                        <outlet property="positionButtonOne" destination="GJ3-ys-L6B" id="Nm9-Db-Rcl"/>
+                        <outlet property="positionButtonOne" destination="BEG-7d-lSi" id="kpB-Ak-qPo"/>
                         <outlet property="positionButtonTwo" destination="HUA-7i-MPr" id="B8s-HY-s3y"/>
-                        <outlet property="sizeButtonOne" destination="HUA-7i-MPr" id="DBW-cP-Yog"/>
+                        <outlet property="sizeButtonOne" destination="gfo-JZ-sLA" id="0N3-u0-Dki"/>
                         <outlet property="sizeButtonTwo" destination="H0T-wW-32l" id="YQG-Ym-416"/>
                     </connections>
                 </viewController>
