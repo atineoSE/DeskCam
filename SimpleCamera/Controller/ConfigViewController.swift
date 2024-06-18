@@ -8,23 +8,21 @@
 import Cocoa
 
 class ConfigViewController: NSViewController {
-
+    
     @IBOutlet weak var backgroundViewOne: NSView!
     @IBOutlet weak var positionButtonOne: NSPopUpButton!
     @IBOutlet weak var maskButtonOne: NSPopUpButton!
     @IBOutlet weak var sizeButtonOne: NSPopUpButton!
-
+    
     @IBOutlet weak var backgroundViewTwo: NSView!
     @IBOutlet weak var positionButtonTwo: NSPopUpButton!
     @IBOutlet weak var maskButtonTwo: NSPopUpButton!
     @IBOutlet weak var sizeButtonTwo: NSPopUpButton!
     
     weak var stateController: StateController?
-    private lazy var allButtons: [NSPopUpButton] = [
-        positionButtonOne, maskButtonOne, sizeButtonOne,
-        positionButtonTwo, maskButtonTwo, sizeButtonTwo
-    ]
-
+    private lazy var viewOneButtons: [NSPopUpButton] = [positionButtonOne, maskButtonOne, sizeButtonOne]
+    private lazy var viewTwoButtons: [NSPopUpButton] = [positionButtonTwo, maskButtonTwo, sizeButtonTwo]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +33,7 @@ class ConfigViewController: NSViewController {
         print("Changed \(sender.identifier) button to \(sender.selectedItem?.title) ")
     }
     
-   @objc
+    @objc
     func positionDidChange(at button: NSPopUpButton, index: Int) {
         guard
             let positionTitle = button.selectedItem?.title,
@@ -80,12 +78,16 @@ class ConfigViewController: NSViewController {
     }
     
     private func setupPopUpButtons() {
-        for button in allButtons {
-            button.menu?.removeAllItems()
-            for attribute in button.attributes {
-                button.menu?.addItem(.init(title: attribute, action: nil, keyEquivalent: .init()))
+        for (index, buttons) in [viewOneButtons, viewTwoButtons].enumerated() {
+            for button in buttons {
+                button.menu?.removeAllItems()
+                for attribute in button.attributes {
+                    button.menu?.addItem(.init(title: attribute, action: nil, keyEquivalent: .init()))
+                }
+                if let state = stateController?.states[index] {
+                    button.select(button.menu?.items.first(where: { $0.title == button.title(from: state) } ))
+                }
             }
-            //button.select(positionButtonOne.menu?.items.first(where: { $0.title == stateController?.states[0].position.rawValue}))
         }
     }
 }
@@ -105,6 +107,23 @@ private extension NSPopUpButton {
         default:
             AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
             return []
+        }
+    }
+    
+    func title(from state: State) -> String? {
+        guard let id = identifier?.rawValue else {
+            return nil
+        }
+        switch id {
+        case "MaskOne", "MaskTwo":
+            return state.mask.rawValue
+        case "PositionOne", "PositionTwo":
+            return state.position.rawValue
+        case "SizeOne", "SizeTwo":
+            return state.size.rawValue
+        default:
+            AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
+            return nil
         }
     }
 }
