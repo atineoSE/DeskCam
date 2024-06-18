@@ -41,10 +41,6 @@ class CameraViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         refresh()
-        
-        cameraView.addSubview(segmentedView)
-        segmentedView.image = NSImage(named: "pardito")
-        segmentedView.frame = cameraView.bounds
     }
 }
 
@@ -118,6 +114,7 @@ extension CameraViewController {
             // Add segmentedView to view hierarchy
             cameraView.layer = nil
             cameraView.addSubview(segmentedView)
+            segmentedView.frame = cameraView.bounds
             return
         }
         
@@ -162,7 +159,7 @@ extension CameraViewController {
             return
         }
         updateWindow()
-        //configure(mask: currentState.mask)
+        configure(mask: currentState.mask)
     }
 }
 
@@ -216,6 +213,6 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         guard stateController?.currentState.mask == .segmented else {
             return
         }
-        //segment(buffer: sampleBuffer)
+        segment(buffer: sampleBuffer)
     }
 }
