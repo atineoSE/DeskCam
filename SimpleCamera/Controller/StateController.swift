@@ -27,28 +27,32 @@ class StateController {
         AppLogger.debug("STATE_CONTROLLER: current state is \(currentState) (index \(currentIndex))")
     }
     
-    func update(_ mask: Mask, isFirst:Bool) {
-        states[currentIndex] = State(mask: mask, size: currentState.size, position: currentState.position)
-        save()
-        delegate?.updateStateIfNeeded()
+    func update(_ mask: Mask, at index: Int) {
+        states[index] = State(mask: mask, size: states[index].size, position: states[index].position)
+        didUpdate(at: index)
     }
     
-    func update(_ position: Position, isFirst: Bool) {
-        states[currentIndex] = State(mask: currentState.mask, size: currentState.size, position: position)
-        save()
-        delegate?.updateStateIfNeeded()
+    func update(_ position: Position, at index: Int) {
+        states[index] = State(mask: states[index].mask, size: states[index].size, position: position)
+        didUpdate(at: index)
     }
     
-    func update(_ size: Size, isFirst: Bool) {
-        states[currentIndex] = State(mask: currentState.mask, size: size, position: currentState.position)
-        save()
-        delegate?.updateStateIfNeeded()
+    func update(_ size: Size, at index: Int) {
+        states[index] = State(mask: states[index].mask, size: size, position: states[index].position)
+        didUpdate(at: index)
     }
     
     func toggleState() {
         currentIndex = (currentIndex + 1) % states.count
         AppSettings.setCurrentState(at: currentIndex)
-        delegate?.updateStateIfNeeded()
+        delegate?.updateState()
+    }
+    
+    private func didUpdate(at index: Int) {
+        save()
+        if index == currentIndex {
+            delegate?.updateState()
+        }
     }
     
     private func save() {

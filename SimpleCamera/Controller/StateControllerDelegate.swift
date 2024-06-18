@@ -8,5 +8,5 @@
 import Foundation
 
 protocol StateControllerDelegate: AnyObject {
-    func updateStateIfNeeded()
+    func updateState()
 }

@@ -127,7 +127,7 @@ class CameraViewController: NSViewController {
 }
 
 extension CameraViewController: StateControllerDelegate {
-    func updateStateIfNeeded() {
+    func updateState() {
         refresh()
     }
 }

@@ -14,90 +14,97 @@ class ConfigViewController: NSViewController {
     @IBOutlet weak var maskButtonOne: NSPopUpButton!
     @IBOutlet weak var sizeButtonOne: NSPopUpButton!
 
+    @IBOutlet weak var backgroundViewTwo: NSView!
+    @IBOutlet weak var positionButtonTwo: NSPopUpButton!
+    @IBOutlet weak var maskButtonTwo: NSPopUpButton!
+    @IBOutlet weak var sizeButtonTwo: NSPopUpButton!
+    
     weak var stateController: StateController?
+    private lazy var allButtons: [NSPopUpButton] = [
+        positionButtonOne, maskButtonOne, sizeButtonOne,
+        positionButtonTwo, maskButtonTwo, sizeButtonTwo
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backgroundViewOne.wantsLayer = true
-        backgroundViewOne.layer?.backgroundColor = NSColor.darkGray.cgColor
-        backgroundViewOne.layer?.cornerRadius = 16.0
-        
+        setupBackgroundViews()
         setupPopUpButtons()
     }
+    @IBAction func didChangeButton(_ sender: NSPopUpButton) {
+        print("Changed \(sender.identifier) button to \(sender.selectedItem?.title) ")
+    }
     
-    @IBAction @objc
-    func positionOneDidChange(_ sender: Any) {
-        guard 
-            let positionTitle = positionButtonOne.selectedItem?.title,
+   @objc
+    func positionDidChange(at button: NSPopUpButton, index: Int) {
+        guard
+            let positionTitle = button.selectedItem?.title,
             let newPosition = Position(rawValue: positionTitle)
         else {
             return
         }
-        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Position one changed to \(newPosition)")
-        stateController?.update(newPosition, isFirst: true)
+        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Position changed to \(newPosition) at index \(index)")
+        stateController?.update(newPosition, at: index)
     }
     
-    @IBAction @objc
-    func maskOneDidChange(_ sender: Any) {
-        guard 
-            let maskTitle = maskButtonOne.selectedItem?.title,
+    @objc
+    func maskDidChange(at button: NSPopUpButton, index: Int) {
+        guard
+            let maskTitle = button.selectedItem?.title,
             let newMask = Mask(rawValue: maskTitle)
         else {
             return
         }
-        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Mask one changed to \(newMask)")
-        stateController?.update(newMask, isFirst: true)
+        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Mask one changed to \(newMask) at index \(index)")
+        stateController?.update(newMask, at: index)
     }
     
-    @IBAction @objc
-    func sizeOneDidChange(_ sender: Any) {
+    @objc
+    func sizeOneDidChange(at button: NSPopUpButton, index: Int) {
         guard
-            let sizeTitle = sizeButtonOne.selectedItem?.title,
+            let sizeTitle = button.selectedItem?.title,
             let newSize = Size(rawValue: sizeTitle)
         else {
             return
         }
-        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Size one changed to \(newSize)")
-        stateController?.update(newSize, isFirst: true)
+        AppLogger.debug("CONFIG_VIEW_CONTROLLER: Size changed to \(newSize) at index \(index)")
+        stateController?.update(newSize, at: index)
+    }
+    
+    private func setupBackgroundViews() {
+        for view in [backgroundViewOne, backgroundViewTwo] {
+            view.wantsLayer = true
+            view.layer?.backgroundColor = NSColor.darkGray.cgColor
+            view.layer?.cornerRadius = 16.0
+        }
     }
     
     private func setupPopUpButtons() {
-        positionButtonOne.menu?.removeAllItems()
-        for position in Position.allCases {
-            positionButtonOne.menu?.addItem(
-                .init(
-                    title: position.rawValue,
-                    action: #selector(positionOneDidChange),
-                    keyEquivalent: .init()
-                )
-            )
+        for button in allButtons {
+            button.menu?.removeAllItems()
+            for attribute in button.attributes {
+                button.menu?.addItem(.init(title: attribute, action: nil, keyEquivalent: .init()))
+            }
+            //button.select(positionButtonOne.menu?.items.first(where: { $0.title == stateController?.states[0].position.rawValue}))
         }
-        positionButtonOne.select(positionButtonOne.menu?.items.first(where: { $0.title == stateController?.states[0].position.rawValue}))
+    }
+}
 
-        
-        maskButtonOne.menu?.removeAllItems()
-        for mask in Mask.allCases {
-            maskButtonOne.menu?.addItem(
-                .init(
-                    title: mask.rawValue,
-                    action: #selector(maskOneDidChange),
-                    keyEquivalent: .init()
-                )
-            )
+private extension NSPopUpButton {
+    var attributes: [String] {
+        guard let id = identifier?.rawValue else {
+            return []
         }
-        maskButtonOne.select(maskButtonOne.menu?.items.first(where: { $0.title == stateController?.states[0].mask.rawValue}))
-        
-        sizeButtonOne.menu?.removeAllItems()
-        for size in Size.allCases {
-            sizeButtonOne.menu?.addItem(
-                .init(
-                    title: size.rawValue,
-                    action: #selector(sizeOneDidChange),
-                    keyEquivalent: .init()
-                )
-            )
+        switch id {
+        case "MaskOne", "MaskTwo":
+            return Mask.allCases.map { $0.rawValue }
+        case "PositionOne", "PositionTwo":
+            return Position.allCases.map { $0.rawValue }
+        case "SizeOne", "SizeTwo":
+            return Size.allCases.map { $0.rawValue }
+        default:
+            AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
+            return []
         }
-        sizeButtonOne.select(sizeButtonOne.menu?.items.first(where: { $0.title == stateController?.states[0].size.rawValue}))
     }
 }
