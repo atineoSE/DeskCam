@@ -19,6 +19,13 @@ class CameraViewController: NSViewController {
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
     
+    private lazy var detectPersonSegmentationRequest: VNGeneratePersonSegmentationRequest = {
+        let request = VNGeneratePersonSegmentationRequest()
+        request.revision = VNGeneratePersonSegmentationRequestRevision1
+        request.qualityLevel = .accurate
+        return request
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
@@ -146,13 +153,29 @@ extension CameraViewController: StateControllerDelegate {
 // MARK: - Vision
 
 extension CameraViewController {
-    
+    private func segment(buffer: CMSampleBuffer) {
+        let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
+        do {
+            try handler.perform([detectPersonSegmentationRequest])
+            guard let result = detectPersonSegmentationRequest.results?.first else {
+                AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to obtain a segmentation mask.")
+                return
+            }
+            let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer)
+            AppLogger.debug("CAMERA_VIEW_CONTROLLER: got mask")
+        } catch let error as NSError {
+            AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to perform segmentation request with error \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
-extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
+extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // No-op
+        guard stateController?.currentState.mask == .segmented else {
+            return
+        }
+        segment(buffer: sampleBuffer)
     }
 }
