@@ -96,15 +96,15 @@ class CameraViewController: NSViewController {
         cameraView.layer = cameraLayer
     }
     
-    private func configure(mask: Mask, in rect: CGRect) {
+    private func configure(mask: Mask) {
+        let viewRect = cameraView.bounds
         let shapeLayer = CAShapeLayer()
-        shapeLayer.frame = rect
-        shapeLayer.path = mask.path(in: rect)
-        //cameraView.bounds = rect
+        shapeLayer.frame = viewRect
+        shapeLayer.path = mask.path(in: viewRect)
         cameraView.layer?.mask = shapeLayer
         cameraView.layer?.backgroundColor = .clear
-        cameraLayer.frame = rect
-        print("CAMERA VIEW CONTROLLER: Updated layer frame to \(rect)")
+        cameraLayer?.frame = viewRect
+        print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
     }
 }
 
@@ -129,11 +129,11 @@ extension CameraViewController: StateControllerDelegate {
         let currentState = stateController.currentState
         AppLogger.debug("CAMERA_VIEW_CONTROLLER: Update view with screen size \(screenSize) to state \(currentState)")
         
-        let rect = currentState.rect(from: screenSize)
-        AppLogger.debug("CAMERA_VIEW_CONTROLLER: got rect \(rect) for state \(currentState)")
+        let windowRect = currentState.rect(from: screenSize)
+        AppLogger.debug("CAMERA_VIEW_CONTROLLER: got rect \(windowRect) for state \(currentState)")
         
-        window.update(with: rect)
-        configure(mask: currentState.mask, in: rect)
+        window.update(with: windowRect)
+        configure(mask: currentState.mask)
         self.currentState = currentState
     }
 }
