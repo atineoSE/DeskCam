@@ -18,9 +18,9 @@ extension Size {
         let baseHeight = totalSize.height
         switch self {
         case .small:
-            return CGSize(width: baseHeight/4.0, height: baseHeight/4.0)
+            return CGSize(width: floor(baseHeight/4.0), height: floor(baseHeight/4.0))
         case .medium:
-            return CGSize(width: baseHeight/3.0, height: baseHeight/3.0)
+            return CGSize(width: floor(baseHeight/3.0), height: floor(baseHeight/3.0))
         case .full:
             return CGSize(width: totalSize.width, height: baseHeight)
         }
