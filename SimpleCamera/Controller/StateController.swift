@@ -9,12 +9,8 @@ import Foundation
 
 class StateController {
     private(set) var states: [State]
-    private var isFirst: Bool
+    private var currentIndex: Int
     private weak var delegate: StateControllerDelegate?
-    
-    private var currentIndex: Int {
-        isFirst ? 0 : 1
-    }
     
     var currentState: State {
         states[currentIndex]
@@ -22,12 +18,13 @@ class StateController {
     
     init(delegate: StateControllerDelegate) {
         self.delegate = delegate
-        isFirst = !AppSettings.isCurrentStateSecond()
+        currentIndex = AppSettings.currentIndex
         states = [
-            AppSettings.getState(isFirst: true) ?? State.default,
-            AppSettings.getState(isFirst: false) ?? State.default
+            AppSettings.state(at: 0) ?? State.default,
+            AppSettings.state(at: 1) ?? State.default
         ]
         AppLogger.debug("STATE_CONTROLLER: initialized with states \(states)")
+        AppLogger.debug("STATE_CONTROLLER: current state is \(currentState) (index \(currentIndex))")
     }
     
     func update(_ mask: Mask, isFirst:Bool) {
@@ -49,13 +46,14 @@ class StateController {
     }
     
     func toggleState() {
-        isFirst.toggle()
-        AppSettings.setCurrentState(isFirst: isFirst)
+        currentIndex = (currentIndex + 1) % states.count
+        AppSettings.setCurrentState(at: currentIndex)
         delegate?.updateStateIfNeeded()
     }
     
     private func save() {
-        AppSettings.saveState(states[0], isFirst: true)
-        AppSettings.saveState(states[1], isFirst: false)
+        for (index, _) in states.enumerated() {
+            AppSettings.save(states[index], at: index)
+        }
     }
 }
