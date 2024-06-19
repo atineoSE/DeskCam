@@ -159,21 +159,6 @@ extension CameraViewController {
         AppLogger.debug("CAMERA_VIEW_CONTROLLER: Updated window with screen size \(screenSize) to \(windowRect) (state: \(currentState))")
     }
     
-    private func updateCameraTransform() {
-        guard
-            let cameraImageSize = cameraImageSize,
-            let currentState = stateController?.currentState,
-            let screenSize = NSScreen.screenSize
-        else {
-            return
-        }
-        cameraTransform = CGAffineTransform.cameraTransform(
-            state: currentState,
-            cameraImageSize: cameraImageSize,
-            screenSize: screenSize
-        )
-    }
-    
     private func refresh() {
         AppLogger.debug("CAMERA_VIEW_CONTROLLER: Refresh")
         guard let currentState = stateController?.currentState else {
@@ -181,7 +166,6 @@ extension CameraViewController {
         }
         updateWindow()
         configure(mask: currentState.mask)
-        updateCameraTransform()
     }
 }
 
@@ -199,27 +183,41 @@ extension CameraViewController {
     private func segment(buffer: CMSampleBuffer) {
         guard 
             let cameraImageBuffer = buffer.imageBuffer,
-            let cameraTransform = cameraTransform
+            let state = stateController?.currentState,
+            let screenSize = NSScreen.screenSize,
+            let cameraImageSize = cameraImageSize
         else {
             return
         }
         let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
+        let windowSize = state.size.size(over: screenSize)
         do {
+            // Obtain segmentation observation
             try handler.perform([detectPersonSegmentationRequest])
             guard let result = detectPersonSegmentationRequest.results?.first else {
                 AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to obtain a segmentation mask.")
                 return
             }
+            
+            // Get mask from observation
+            let maskPixelBuffer = result.pixelBuffer
+            let pixelBufferSize = CGSize(
+                width: CGFloat(CVPixelBufferGetWidth(maskPixelBuffer)),
+                height: CGFloat(CVPixelBufferGetHeight(maskPixelBuffer))
+            )
+            
+            // Transform camera and mask images
+            let maskTransform = CGAffineTransform.transform(initialImageSize: pixelBufferSize, targetImageSize: windowSize)
+            let cameraTransform = CGAffineTransform.transform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
+            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: maskTransform)
+            let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
+            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 
-                // Transform camera and mask images
-                let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer).transformed(by: cameraTransform)
-                let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
-                
                 // Compose camera image and mask
                 let imageRect = self.cameraView.bounds
-                if let segmentedCGImage = ciContext.createCGImage(cameraCIImage.composited(over: maskCIImage), from: imageRect) {
+                if let segmentedCGImage = ciContext.createCGImage(maskCIImage.composited(over: cameraCIImage), from: imageRect) {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                 }
             }
