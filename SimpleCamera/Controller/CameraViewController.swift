@@ -191,7 +191,6 @@ extension CameraViewController {
         }
         let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
         let windowSize = state.size.size(over: screenSize)
-        let imageRect = state.rect(from: screenSize)
         do {
             // Obtain segmentation observation
             try handler.perform([detectPersonSegmentationRequest])
@@ -213,14 +212,15 @@ extension CameraViewController {
             let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
             let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
             
-            let background = false ?
+            let background = true ?
                 GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty() :
                 CIImage.empty()
 
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-
+                let imageRect = self.cameraView.bounds  // Important to refer to actual view and not to window rect
+                
                 // Compose camera image and mask
                 if
                     let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
