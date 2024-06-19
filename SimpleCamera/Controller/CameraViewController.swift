@@ -103,7 +103,7 @@ extension CameraViewController {
         }
     }
     
-    /*
+    /* -- Use to render camera view directly
     private func setupLayers() {
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
         cameraLayer.backgroundColor = .clear
