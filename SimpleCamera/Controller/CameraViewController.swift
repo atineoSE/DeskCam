@@ -136,6 +136,8 @@ extension CameraViewController {
         
         // Update segmented view
         segmentedView.frame = viewRect
+        segmentedView.setNeedsDisplay(viewRect)
+        segmentedView.displayIfNeeded()
         
         print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
     }
