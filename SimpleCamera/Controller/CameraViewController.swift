@@ -233,6 +233,8 @@ extension CameraViewController {
                     let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
+                    segmentedView.setNeedsDisplay(imageRect)
+                    segmentedView.displayIfNeeded()
                 }
             }
 
