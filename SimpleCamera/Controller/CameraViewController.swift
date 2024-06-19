@@ -191,6 +191,7 @@ extension CameraViewController {
         }
         let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
         let windowSize = state.size.size(over: screenSize)
+        let imageRect = state.rect(from: screenSize)
         do {
             // Obtain segmentation observation
             try handler.perform([detectPersonSegmentationRequest])
@@ -206,45 +207,27 @@ extension CameraViewController {
                 height: CGFloat(CVPixelBufferGetHeight(maskPixelBuffer))
             )
             
+            // Transform camera and mask images
+            let cameraTransform = CGAffineTransform.transform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
+            let downSampleTransform = CGAffineTransform(
+                scaleX: cameraImageSize.width / pixelBufferSize.width,
+                y: cameraImageSize.height / pixelBufferSize.height
+            )
+            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downSampleTransform.concatenating(cameraTransform))
+            let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
+            
+            let background = false ?
+                GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty() :
+                CIImage.empty()
 
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
 
                 // Compose camera image and mask
-                let imageRect = self.cameraView.bounds
-                
-                
-                print("windowSize \(windowSize) imageRect.size \(imageRect.size) pixelBufferSize \(pixelBufferSize) cameraImageSize \(cameraImageSize)")
-                
-                // Transform camera and mask images
-                //let maskTransform = CGAffineTransform.transform(initialImageSize: pixelBufferSize, targetImageSize: windowSize)
-                
-                let scaleFactor = windowSize.height / pixelBufferSize.height
-                let xOffset = ((pixelBufferSize.width * scaleFactor) - windowSize.width) / 2.0
-                let maskTransform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-                    .concatenating(CGAffineTransform(translationX: -xOffset, y: 0.0))
-                
-                
-                
-                let cameraTransform = CGAffineTransform.transform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
-                let downSampleTransform = CGAffineTransform(
-                    scaleX: cameraImageSize.width / pixelBufferSize.width,
-                    y: cameraImageSize.height / pixelBufferSize.height
-                )
-                let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downSampleTransform.concatenating(cameraTransform))
-                //let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downSampleTransform)
-                
-                let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
-                
-                let background = false ?
-                    GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty() :
-                    CIImage.empty()
-                
                 if
                     let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
                     let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
-                    //let segmentedCGImage = ciContext.createCGImage(maskCIImage, from: imageRect)
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                 }
