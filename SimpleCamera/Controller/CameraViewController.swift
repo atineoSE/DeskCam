@@ -103,6 +103,10 @@ extension CameraViewController {
     
     private func setupLayers() {
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
+        cameraLayer.backgroundColor = .clear
+        cameraLayer.borderColor = .clear
+        cameraLayer.shadowColor = .clear
+        
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
         cameraLayer.connection?.isVideoMirrored = false
         self.cameraLayer = cameraLayer
@@ -139,7 +143,6 @@ extension CameraViewController {
         
         // Apply mask
         cameraView.layer?.mask = shapeLayer
-        cameraView.layer?.backgroundColor = .clear
         cameraLayer?.frame = viewRect
         
         print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
