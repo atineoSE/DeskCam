@@ -191,16 +191,16 @@
                                                 </textFieldCell>
                                             </textField>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="GwH-yT-Uhv" userLabel="CardView">
-                                                <rect key="frame" x="35" y="0.0" width="142" height="164"/>
+                                                <rect key="frame" x="9" y="0.0" width="194" height="164"/>
                                                 <subviews>
                                                     <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lnU-Cv-3N8">
-                                                        <rect key="frame" x="8" y="8" width="126" height="148"/>
+                                                        <rect key="frame" x="8" y="8" width="178" height="148"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Fx-gb-qLU">
-                                                                <rect key="frame" x="0.0" y="38" width="59" height="72"/>
+                                                                <rect key="frame" x="0.0" y="24" width="85" height="100"/>
                                                                 <subviews>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BaH-L9-ho9">
-                                                                        <rect key="frame" x="24" y="56" width="37" height="16"/>
+                                                                        <rect key="frame" x="50" y="84" width="37" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Mask" id="PkN-Yd-9x5">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -208,7 +208,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6H-gc-Gs7">
-                                                                        <rect key="frame" x="31" y="28" width="30" height="16"/>
+                                                                        <rect key="frame" x="57" y="56" width="30" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Size" id="Fry-ER-aEW">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -216,8 +216,16 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kzc-tI-ltB">
-                                                                        <rect key="frame" x="8" y="0.0" width="53" height="16"/>
+                                                                        <rect key="frame" x="34" y="28" width="53" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Position" id="xOw-Bq-HC6">
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                    </textField>
+                                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EK4-82-Amy">
+                                                                        <rect key="frame" x="-2" y="0.0" width="89" height="16"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Segmentation" id="YG5-dk-Jna">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -228,18 +236,20 @@
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
+                                                                    <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                 </customSpacing>
                                                             </stackView>
                                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rwr-O2-d2N">
-                                                                <rect key="frame" x="67" y="36" width="59" height="76"/>
+                                                                <rect key="frame" x="93" y="22" width="85" height="104"/>
                                                                 <subviews>
                                                                     <popUpButton identifier="MaskOne" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BEG-7d-lSi" userLabel="Mask Button One">
-                                                                        <rect key="frame" x="-3" y="52" width="66" height="25"/>
+                                                                        <rect key="frame" x="-3" y="80" width="66" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="nuF-MP-aBj" id="nmp-sr-iN3">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="menu"/>
@@ -254,7 +264,7 @@
                                                                         </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="SizeOne" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="stG-sM-2i3" userLabel="Size Button One">
-                                                                        <rect key="frame" x="-3" y="24" width="66" height="25"/>
+                                                                        <rect key="frame" x="-3" y="52" width="66" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ig6-sH-FTq" id="5jB-i9-VZC">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="menu"/>
@@ -269,7 +279,7 @@
                                                                         </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="PositionOne" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gfo-JZ-sLA" userLabel="Position Button One">
-                                                                        <rect key="frame" x="-3" y="-4" width="66" height="25"/>
+                                                                        <rect key="frame" x="-3" y="24" width="66" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="BNE-SC-SIK" id="EDZ-E0-tTP">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="menu"/>
@@ -283,13 +293,30 @@
                                                                             <action selector="didChangeButton:" target="9L6-US-oCV" id="aug-bq-g4x"/>
                                                                         </connections>
                                                                     </popUpButton>
+                                                                    <popUpButton identifier="SegmentationOne" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQ8-Xl-EbH" userLabel="Segmentation Button One">
+                                                                        <rect key="frame" x="-3" y="-4" width="66" height="25"/>
+                                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="6Jy-E3-MiM" id="Y4J-f9-WEQ">
+                                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="menu"/>
+                                                                            <menu key="menu" id="0M1-Xc-yjR">
+                                                                                <items>
+                                                                                    <menuItem title="Item" state="on" id="6Jy-E3-MiM"/>
+                                                                                </items>
+                                                                            </menu>
+                                                                        </popUpButtonCell>
+                                                                        <connections>
+                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="OJB-KH-EiU"/>
+                                                                        </connections>
+                                                                    </popUpButton>
                                                                 </subviews>
                                                                 <visibilityPriorities>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
+                                                                    <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
@@ -341,10 +368,10 @@
                                                         <rect key="frame" x="8" y="8" width="211" height="148"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="isz-Sj-S01">
-                                                                <rect key="frame" x="0.0" y="38" width="102" height="72"/>
+                                                                <rect key="frame" x="0.0" y="24" width="102" height="100"/>
                                                                 <subviews>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="97f-sv-eI6">
-                                                                        <rect key="frame" x="67" y="56" width="37" height="16"/>
+                                                                        <rect key="frame" x="67" y="84" width="37" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Mask" id="uvr-7m-vtL">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -352,7 +379,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="efd-C6-5kU">
-                                                                        <rect key="frame" x="74" y="28" width="30" height="16"/>
+                                                                        <rect key="frame" x="74" y="56" width="30" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Size" id="Iti-7M-uEw">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -360,8 +387,16 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZAs-wO-Oiq">
-                                                                        <rect key="frame" x="51" y="0.0" width="53" height="16"/>
+                                                                        <rect key="frame" x="51" y="28" width="53" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Position" id="eQj-da-lo6">
+                                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                    </textField>
+                                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="alO-3j-u1j">
+                                                                        <rect key="frame" x="15" y="0.0" width="89" height="16"/>
+                                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Segmentation" id="6dF-aQ-D1g">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -372,18 +407,20 @@
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
+                                                                    <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                 </customSpacing>
                                                             </stackView>
                                                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hXq-OL-MMb">
-                                                                <rect key="frame" x="110" y="36" width="101" height="76"/>
+                                                                <rect key="frame" x="110" y="22" width="101" height="104"/>
                                                                 <subviews>
                                                                     <popUpButton identifier="MaskTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GJ3-ys-L6B" userLabel="Mask Button Two">
-                                                                        <rect key="frame" x="-3" y="52" width="66" height="25"/>
+                                                                        <rect key="frame" x="-3" y="80" width="66" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pKG-di-Qqy" id="fO9-fB-MsC">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="menu"/>
@@ -398,7 +435,7 @@
                                                                         </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="SizeTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-wW-32l" userLabel="Size Button Two">
-                                                                        <rect key="frame" x="-3" y="24" width="66" height="25"/>
+                                                                        <rect key="frame" x="-3" y="52" width="66" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="OJX-LP-YN3" id="6km-Da-zjO">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="menu"/>
@@ -413,7 +450,7 @@
                                                                         </connections>
                                                                     </popUpButton>
                                                                     <popUpButton identifier="PositionTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-7i-MPr" userLabel="Position Button Two">
-                                                                        <rect key="frame" x="-3" y="-4" width="66" height="25"/>
+                                                                        <rect key="frame" x="-3" y="24" width="66" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="27J-bX-j9F" id="UhW-8v-5Mq">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                             <font key="font" metaFont="menu"/>
@@ -427,13 +464,30 @@
                                                                             <action selector="didChangeButton:" target="9L6-US-oCV" id="XTH-Vt-Zht"/>
                                                                         </connections>
                                                                     </popUpButton>
+                                                                    <popUpButton identifier="SegmentationTwo" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mXJ-YP-nNh" userLabel="Segmentation Button Two">
+                                                                        <rect key="frame" x="-3" y="-4" width="66" height="25"/>
+                                                                        <popUpButtonCell key="cell" type="push" title="Item" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="58t-GJ-CnJ" id="jyT-ZZ-NlA">
+                                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                            <font key="font" metaFont="menu"/>
+                                                                            <menu key="menu" id="X1e-48-U3v">
+                                                                                <items>
+                                                                                    <menuItem title="Item" state="on" id="58t-GJ-CnJ"/>
+                                                                                </items>
+                                                                            </menu>
+                                                                        </popUpButtonCell>
+                                                                        <connections>
+                                                                            <action selector="didChangeButton:" target="9L6-US-oCV" id="Bmj-Y8-gVp"/>
+                                                                        </connections>
+                                                                    </popUpButton>
                                                                 </subviews>
                                                                 <visibilityPriorities>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
                                                                     <integer value="1000"/>
+                                                                    <integer value="1000"/>
                                                                 </visibilityPriorities>
                                                                 <customSpacing>
+                                                                    <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
                                                                     <real value="3.4028234663852886e+38"/>
@@ -494,6 +548,8 @@
                         <outlet property="maskButtonTwo" destination="GJ3-ys-L6B" id="qCl-AI-euw"/>
                         <outlet property="positionButtonOne" destination="BEG-7d-lSi" id="kpB-Ak-qPo"/>
                         <outlet property="positionButtonTwo" destination="HUA-7i-MPr" id="B8s-HY-s3y"/>
+                        <outlet property="segmentationButtonOne" destination="IQ8-Xl-EbH" id="qxi-GD-5nI"/>
+                        <outlet property="segmentationButtonTwo" destination="mXJ-YP-nNh" id="IAU-UP-3Zf"/>
                         <outlet property="sizeButtonOne" destination="gfo-JZ-sLA" id="0N3-u0-Dki"/>
                         <outlet property="sizeButtonTwo" destination="H0T-wW-32l" id="YQG-Ym-416"/>
                     </connections>

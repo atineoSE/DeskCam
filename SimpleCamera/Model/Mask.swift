@@ -12,7 +12,6 @@ enum Mask: String, Codable, CaseIterable, Equatable {
     case circle = "Cirle"
     case roundedRectangle = "Rounded rectangle"
     case square = "Square"
-    case segmented = "Segmented"
 }
 
 extension Mask {

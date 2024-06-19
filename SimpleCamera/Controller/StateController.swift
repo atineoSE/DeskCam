@@ -28,17 +28,22 @@ class StateController {
     }
     
     func update(_ mask: Mask, at index: Int) {
-        states[index] = State(mask: mask, size: states[index].size, position: states[index].position)
+        states[index].mask = mask
         didUpdate(at: index)
     }
     
     func update(_ position: Position, at index: Int) {
-        states[index] = State(mask: states[index].mask, size: states[index].size, position: position)
+        states[index].position = position
         didUpdate(at: index)
     }
     
     func update(_ size: Size, at index: Int) {
-        states[index] = State(mask: states[index].mask, size: size, position: states[index].position)
+        states[index].size = size
+        didUpdate(at: index)
+    }
+    
+    func update(_ segmentation: Segmentation, at index: Int) {
+        states[index].segmentation = segmentation
         didUpdate(at: index)
     }
     

@@ -14,16 +14,18 @@ class ConfigViewController: NSViewController {
     @IBOutlet weak var positionButtonOne: NSPopUpButton!
     @IBOutlet weak var maskButtonOne: NSPopUpButton!
     @IBOutlet weak var sizeButtonOne: NSPopUpButton!
+    @IBOutlet weak var segmentationButtonOne: NSPopUpButton!
     
     @IBOutlet weak var labelViewTwo: NSTextField!
     @IBOutlet weak var backgroundViewTwo: NSView!
     @IBOutlet weak var positionButtonTwo: NSPopUpButton!
     @IBOutlet weak var maskButtonTwo: NSPopUpButton!
     @IBOutlet weak var sizeButtonTwo: NSPopUpButton!
+    @IBOutlet weak var segmentationButtonTwo: NSPopUpButton!
     
     weak var stateController: StateController?
-    private lazy var viewOneButtons: [NSPopUpButton] = [positionButtonOne, maskButtonOne, sizeButtonOne]
-    private lazy var viewTwoButtons: [NSPopUpButton] = [positionButtonTwo, maskButtonTwo, sizeButtonTwo]
+    private lazy var viewOneButtons: [NSPopUpButton] = [positionButtonOne, maskButtonOne, sizeButtonOne, segmentationButtonOne]
+    private lazy var viewTwoButtons: [NSPopUpButton] = [positionButtonTwo, maskButtonTwo, sizeButtonTwo, segmentationButtonTwo]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,10 @@ class ConfigViewController: NSViewController {
             if let position = Position(rawValue: title) {
                 stateController?.update(position, at: 0)
             }
+        case "SegmentationOne":
+            if let segmentation = Segmentation(rawValue: title) {
+                stateController?.update(segmentation, at: 0)
+            }
         case "PositionTwo":
             if let position = Position(rawValue: title) {
                 stateController?.update(position, at: 1)
@@ -65,6 +71,10 @@ class ConfigViewController: NSViewController {
         case "SizeTwo":
             if let size = Size(rawValue: title) {
                 stateController?.update(size, at: 1)
+            }
+        case "SegmentationTwo":
+            if let segmentation = Segmentation(rawValue: title) {
+                stateController?.update(segmentation, at: 1)
             }
         default:
             AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
@@ -120,6 +130,8 @@ private extension NSPopUpButton {
             return Position.allCases.map { $0.rawValue }
         case "SizeOne", "SizeTwo":
             return Size.allCases.map { $0.rawValue }
+        case "SegmentationOne", "SegmentationTwo":
+            return Segmentation.allCases.map { $0.rawValue }
         default:
             AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
             return []
@@ -137,6 +149,8 @@ private extension NSPopUpButton {
             return state.position.rawValue
         case "SizeOne", "SizeTwo":
             return state.size.rawValue
+        case "SegmentationOne", "SegmentationTwo":
+            return state.segmentation.rawValue
         default:
             AppLogger.error("CONFIG_VIEW_CONTROLLER: Unexpected pop up button with identifier \(id)")
             return nil
