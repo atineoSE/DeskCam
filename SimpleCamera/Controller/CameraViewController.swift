@@ -208,12 +208,9 @@ extension CameraViewController {
             )
             
             // Transform camera and mask images
-            let cameraTransform = CGAffineTransform.transform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
-            let downSampleTransform = CGAffineTransform(
-                scaleX: cameraImageSize.width / pixelBufferSize.width,
-                y: cameraImageSize.height / pixelBufferSize.height
-            )
-            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downSampleTransform.concatenating(cameraTransform))
+            let downsampleTransform = CGAffineTransform.downsampleTransform(initialImageSize: pixelBufferSize, targetImageSize: cameraImageSize)
+            let cameraTransform = CGAffineTransform.cameraTransform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
+            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
             let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
             
             let background = false ?
