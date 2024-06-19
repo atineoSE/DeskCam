@@ -212,10 +212,12 @@ extension CameraViewController {
             let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
             let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
             
-            let background = true ?
-                GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty() :
-                CIImage.empty()
-
+            let background: CIImage
+            if false {
+                background = GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty()
+            } else {
+                background = CIImage.empty()
+            }
 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
