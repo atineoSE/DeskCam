@@ -17,6 +17,7 @@ class CameraViewController: NSViewController {
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     private let ciContext = CIContext()
     private var segmentedView = NSImageView()
+    private var cameraImageSize: CGSize?
     
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
@@ -93,6 +94,10 @@ extension CameraViewController {
         }
         
         session.commitConfiguration()
+        
+        if let dimensions = videoDevice?.activeFormat.formatDescription.dimensions {
+            cameraImageSize = CGSize(width: Int(dimensions.width), height: Int(dimensions.height))
+        }
     }
     
     private func setupLayers() {
@@ -175,6 +180,14 @@ extension CameraViewController: StateControllerDelegate {
 
 extension CameraViewController {
     private func segment(buffer: CMSampleBuffer) {
+        guard 
+            let cameraImageBuffer = buffer.imageBuffer,
+            let cameraImageSize = cameraImageSize,
+            let currentState = stateController?.currentState,
+            let screenSize = NSScreen.screenSize
+        else {
+            return
+        }
         let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
         do {
             try handler.perform([detectPersonSegmentationRequest])
@@ -184,11 +197,18 @@ extension CameraViewController {
             }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                let transform = CGAffineTransform(scaleX: 0.3, y: 0.3).translatedBy(x: 0.5, y: -0.7)
+                let maskPixelBuffer = result.pixelBuffer
+                let windowSize = currentState.size.size(over: screenSize)
+                let scaleFactor =  windowSize.height / cameraImageSize.height
+                print("cameraImageSize \(cameraImageSize) screenSize \(screenSize) windowSize \(windowSize) scaleFactor \(scaleFactor)")
+                //let translationFactor = cameraImageSize.width
+                let transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor).translatedBy(x: 0.5, y: -0.7)
+                // TODO 1: fix transform
                 let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer).transformed(by: transform)
+                let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: transform)
                 let imageRect = self.cameraView.bounds
-                if let maskCGImage = ciContext.createCGImage(maskCIImage, from: imageRect) {
-                    segmentedView.image = NSImage(cgImage: maskCGImage, size: .zero)
+                if let segmentedCGImage = ciContext.createCGImage(cameraCIImage, from: imageRect) {
+                    segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                 }
             }
         } catch let error as NSError {
