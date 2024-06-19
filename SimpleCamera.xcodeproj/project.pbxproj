@@ -20,6 +20,7 @@
 		3C654C8E2C208D1F00AA1BA1 /* NSScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C654C8D2C208D1F00AA1BA1 /* NSScreen.swift */; };
 		3C654C902C2097C900AA1BA1 /* CameraViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C654C8F2C2097C900AA1BA1 /* CameraViewControllerDelegate.swift */; };
 		3C654C922C22ECD200AA1BA1 /* CGAffineTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C654C912C22ECD200AA1BA1 /* CGAffineTransform.swift */; };
+		3C654C942C23317700AA1BA1 /* CIFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C654C932C23317700AA1BA1 /* CIFilter.swift */; };
 		3C8D13742C1B63E900ECCA04 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13732C1B63E900ECCA04 /* Position.swift */; };
 		3C8D13762C1B642D00ECCA04 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13752C1B642D00ECCA04 /* State.swift */; };
 		3C8D13782C1B64CF00ECCA04 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */; };
@@ -43,6 +44,7 @@
 		3C654C8D2C208D1F00AA1BA1 /* NSScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScreen.swift; sourceTree = "<group>"; };
 		3C654C8F2C2097C900AA1BA1 /* CameraViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3C654C912C22ECD200AA1BA1 /* CGAffineTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGAffineTransform.swift; sourceTree = "<group>"; };
+		3C654C932C23317700AA1BA1 /* CIFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilter.swift; sourceTree = "<group>"; };
 		3C8D13732C1B63E900ECCA04 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		3C8D13752C1B642D00ECCA04 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		3C8D13772C1B64CF00ECCA04 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				3C8D13732C1B63E900ECCA04 /* Position.swift */,
 				3C8D13752C1B642D00ECCA04 /* State.swift */,
 				3C654C912C22ECD200AA1BA1 /* CGAffineTransform.swift */,
+				3C654C932C23317700AA1BA1 /* CIFilter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				3C8D13742C1B63E900ECCA04 /* Position.swift in Sources */,
 				3C8D13782C1B64CF00ECCA04 /* AppSettings.swift in Sources */,
 				3C654C902C2097C900AA1BA1 /* CameraViewControllerDelegate.swift in Sources */,
+				3C654C942C23317700AA1BA1 /* CIFilter.swift in Sources */,
 				3C8D137A2C1B683A00ECCA04 /* AppLogger.swift in Sources */,
 				3C654C922C22ECD200AA1BA1 /* CGAffineTransform.swift in Sources */,
 				3C654C8E2C208D1F00AA1BA1 /* NSScreen.swift in Sources */,
