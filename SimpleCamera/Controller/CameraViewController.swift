@@ -26,7 +26,7 @@ class CameraViewController: NSViewController {
     private lazy var detectPersonSegmentationRequest: VNGeneratePersonSegmentationRequest = {
         let request = VNGeneratePersonSegmentationRequest()
         request.revision = VNGeneratePersonSegmentationRequestRevision1
-        request.qualityLevel = .accurate
+        request.qualityLevel = .balanced
         return request
     }()
     
