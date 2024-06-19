@@ -103,7 +103,7 @@ extension CameraViewController {
     private func setupLayers() {
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
         cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
-        cameraLayer.connection?.isVideoMirrored = true
+        cameraLayer.connection?.isVideoMirrored = false
         self.cameraLayer = cameraLayer
         cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         cameraView.wantsLayer = true
@@ -200,9 +200,12 @@ extension CameraViewController {
                 let maskPixelBuffer = result.pixelBuffer
                 let windowSize = currentState.size.size(over: screenSize)
                 let scaleFactor =  windowSize.height / cameraImageSize.height
-                print("cameraImageSize \(cameraImageSize) screenSize \(screenSize) windowSize \(windowSize) scaleFactor \(scaleFactor)")
-                //let translationFactor = cameraImageSize.width
-                let transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor).translatedBy(x: 0.5, y: -0.7)
+                let xTranslationOffset = ((cameraImageSize.width * scaleFactor) - windowSize.width) / 2.0
+                //let xTranslationOffset = ((cameraImageSize.width * scaleFactor) / 2.0) - (windowSize.width / 2.0)
+                print("currentState \(currentState) cameraImageSize \(cameraImageSize) screenSize \(screenSize) windowSize \(windowSize) scaleFactor \(scaleFactor) translationOffset \(xTranslationOffset)")
+                let transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
+                    .translatedBy(x: -xTranslationOffset, y: 0.0)
+
                 // TODO 1: fix transform
                 let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer).transformed(by: transform)
                 let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: transform)
