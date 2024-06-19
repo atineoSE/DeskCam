@@ -136,8 +136,8 @@ extension CameraViewController {
         
         // Update segmented view
         segmentedView.frame = viewRect
-        segmentedView.setNeedsDisplay(viewRect)
-        segmentedView.displayIfNeeded()
+        cameraView.setNeedsDisplay(viewRect)
+        cameraView.displayIfNeeded()
         
         print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
     }
@@ -198,8 +198,8 @@ extension CameraViewController {
                 let imageRect = self.cameraView.bounds  // Important to refer to actual view and not to window rect
                 if let cameraCGImage = ciContext.createCGImage(cameraCIImage, from: imageRect) {
                     segmentedView.image = NSImage(cgImage: cameraCGImage, size: .zero)
-                    segmentedView.setNeedsDisplay(imageRect)
-                    segmentedView.displayIfNeeded()
+                    cameraView.setNeedsDisplay(imageRect)
+                    cameraView.displayIfNeeded()
                 }
             }
             return
@@ -244,8 +244,8 @@ extension CameraViewController {
                     let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
-                    segmentedView.setNeedsDisplay(imageRect)
-                    segmentedView.displayIfNeeded()
+                    cameraView.setNeedsDisplay(imageRect)
+                    cameraView.displayIfNeeded()
                 }
             }
 
