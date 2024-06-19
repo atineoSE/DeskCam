@@ -25,7 +25,7 @@ extension Size {
         case .large:
             return CGSize(width: floor(baseHeight * 0.8), height: floor(baseHeight * 0.8))
         case .full:
-            return CGSize(width: totalSize.width, height: baseHeight)
+            return CGSize(width: totalSize.width * 0.8, height: baseHeight * 0.8)
         }
     }
 }

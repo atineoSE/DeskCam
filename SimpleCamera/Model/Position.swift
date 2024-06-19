@@ -38,7 +38,7 @@ extension Position {
         case .bottomCenter:
             return CGPoint(
                 x: (totalSize.width - targetSize.width) / 2.0,
-                y: margin
+                y: 0.0
             )
         case .topLeft:
             return CGPoint(
