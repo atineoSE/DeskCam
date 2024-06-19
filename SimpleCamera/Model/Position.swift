@@ -11,6 +11,7 @@ enum Position: String, Codable, CaseIterable, Equatable {
     case topLeft = "Top left"
     case topRight = "Top right"
     case center = "Center"
+    case bottomCenter = "Bottom center"
     case bottomLeft = "Bottom left"
     case bottomRight = "Bottom right"
 }
@@ -33,6 +34,11 @@ extension Position {
             return CGPoint(
                 x: (totalSize.width / 2.0) - (targetSize.width / 2.0),
                 y: (totalSize.height / 2.0) - (targetSize.height / 2.0)
+            )
+        case .bottomCenter:
+            return CGPoint(
+                x: (totalSize.width - targetSize.width) / 2.0,
+                y: margin
             )
         case .topLeft:
             return CGPoint(
