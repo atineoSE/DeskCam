@@ -8,6 +8,8 @@
 import Vision
 
 extension CGAffineTransform {
+    
+    
     static func transform(initialImageSize: CGSize, targetImageSize: CGSize) -> Self {
         let scaleFactor = targetImageSize.height / initialImageSize.height
         let xOffset = ((initialImageSize.width * scaleFactor) - targetImageSize.width) / 2.0

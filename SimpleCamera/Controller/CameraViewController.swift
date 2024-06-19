@@ -218,9 +218,23 @@ extension CameraViewController {
                 print("windowSize \(windowSize) imageRect.size \(imageRect.size) pixelBufferSize \(pixelBufferSize) cameraImageSize \(cameraImageSize)")
                 
                 // Transform camera and mask images
-                let maskTransform = CGAffineTransform.transform(initialImageSize: pixelBufferSize, targetImageSize: windowSize)
+                //let maskTransform = CGAffineTransform.transform(initialImageSize: pixelBufferSize, targetImageSize: windowSize)
+                
+                let scaleFactor = windowSize.height / pixelBufferSize.height
+                let xOffset = ((pixelBufferSize.width * scaleFactor) - windowSize.width) / 2.0
+                let maskTransform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
+                    .concatenating(CGAffineTransform(translationX: -xOffset, y: 0.0))
+                
+                
+                
                 let cameraTransform = CGAffineTransform.transform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
-                let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: maskTransform)
+                let downSampleTransform = CGAffineTransform(
+                    scaleX: cameraImageSize.width / pixelBufferSize.width,
+                    y: cameraImageSize.height / pixelBufferSize.height
+                )
+                let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downSampleTransform.concatenating(cameraTransform))
+                //let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downSampleTransform)
+                
                 let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
                 
                 let background = false ?
@@ -230,7 +244,7 @@ extension CameraViewController {
                 if
                     let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
                     let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
-                    //let segmentedCGImage = ciContext.createCGImage(cameraCIImage, from: imageRect)
+                    //let segmentedCGImage = ciContext.createCGImage(maskCIImage, from: imageRect)
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                 }
