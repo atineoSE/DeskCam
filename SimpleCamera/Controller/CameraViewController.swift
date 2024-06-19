@@ -116,6 +116,11 @@ extension CameraViewController {
 
 extension CameraViewController {
     private func configure(mask: Mask) {
+        // Reset view hierarchy
+        for subview in cameraView.subviews {
+            subview.removeFromSuperview()
+        }
+        
         guard mask != .segmented else {
             // Add segmentedView to view hierarchy
             cameraView.layer = nil
@@ -124,10 +129,6 @@ extension CameraViewController {
             return
         }
         
-        // Reset view hierarchy
-        for subview in cameraView.subviews {
-            subview.removeFromSuperview()
-        }
         cameraView.layer = cameraLayer
         
         // We set the layer rects relative to the container view, cameraView
