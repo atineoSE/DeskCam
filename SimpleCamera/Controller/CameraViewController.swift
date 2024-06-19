@@ -34,10 +34,12 @@ class CameraViewController: NSViewController {
         super.viewDidLoad()
         setupAVCapture()
         print("CAMERA VIEW CONTROLLER: set up AV capture session")
-        setupLayers()
-        print("CAMERA VIEW CONTROLLER: set up layers")
+        //setupLayers()
+        //print("CAMERA VIEW CONTROLLER: set up layers")
         session.startRunning()
         print("CAMERA VIEW CONTROLLER: started session")
+        
+        cameraView.addSubview(segmentedView)
     }
     
     override func viewWillAppear() {
@@ -101,6 +103,7 @@ extension CameraViewController {
         }
     }
     
+    /*
     private func setupLayers() {
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
         cameraLayer.backgroundColor = .clear
@@ -114,28 +117,14 @@ extension CameraViewController {
         cameraView.wantsLayer = true
         cameraView.layer = cameraLayer
     }
+     */
 }
 
 // MARK: - State
 
 extension CameraViewController {
     private func configure(mask: Mask) {
-        // Reset view hierarchy
-        for subview in cameraView.subviews {
-            subview.removeFromSuperview()
-        }
-        
-        guard mask != .segmented else {
-            // Add segmentedView to view hierarchy
-            cameraView.layer = nil
-            cameraView.addSubview(segmentedView)
-            segmentedView.frame = cameraView.bounds
-            return
-        }
-        
-        cameraView.layer = cameraLayer
-        
-        // We set the layer rects relative to the container view, cameraView
+        // Set rect relative to the container view, cameraView
         let viewRect = cameraView.bounds
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = viewRect
@@ -145,8 +134,10 @@ extension CameraViewController {
         cameraView.layer?.mask = shapeLayer
         cameraLayer?.frame = viewRect
         
+        // Update segmented view
+        segmentedView.frame = viewRect
+        
         print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
-        return
     }
     
     private func updateWindow() {
@@ -193,8 +184,27 @@ extension CameraViewController {
         else {
             return
         }
-        let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
+        
         let windowSize = state.size.size(over: screenSize)
+        let cameraTransform = CGAffineTransform.cameraTransform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
+        let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
+        
+        // No segmentation to do, just return the image
+        guard state.segmentation != .none else {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                let imageRect = self.cameraView.bounds  // Important to refer to actual view and not to window rect
+                if let cameraCGImage = ciContext.createCGImage(cameraCIImage, from: imageRect) {
+                    segmentedView.image = NSImage(cgImage: cameraCGImage, size: .zero)
+                    segmentedView.setNeedsDisplay(imageRect)
+                    segmentedView.displayIfNeeded()
+                }
+            }
+            return
+        }
+        
+        // Perform segmentation
+        let handler = VNImageRequestHandler(cmSampleBuffer: buffer, options: [:])
         do {
             // Obtain segmentation observation
             try handler.perform([detectPersonSegmentationRequest])
@@ -212,14 +222,13 @@ extension CameraViewController {
             
             // Transform camera and mask images
             let downsampleTransform = CGAffineTransform.downsampleTransform(initialImageSize: pixelBufferSize, targetImageSize: cameraImageSize)
-            let cameraTransform = CGAffineTransform.cameraTransform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
             let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
-            let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
             
             let background: CIImage
-            if false {
+            if state.segmentation == .blur {
                 background = GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty()
             } else {
+                // Cutout
                 background = CIImage.empty()
             }
 
@@ -248,9 +257,6 @@ extension CameraViewController {
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard stateController?.currentState.mask == .segmented else {
-            return
-        }
         segment(buffer: sampleBuffer)
     }
 }

@@ -28,9 +28,6 @@ extension Mask {
             )
         case .square:
             return CGPath(rect: rect, transform: nil)
-        case .segmented:
-            // TODO
-            return CGPath(rect: rect, transform: nil)
         }
     }
 }
