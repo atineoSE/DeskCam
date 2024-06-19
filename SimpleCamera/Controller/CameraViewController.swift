@@ -198,20 +198,16 @@ extension CameraViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 let maskPixelBuffer = result.pixelBuffer
-                let windowSize = currentState.size.size(over: screenSize)
-                let scaleFactor =  windowSize.height / cameraImageSize.height
-                let xOffset = ((cameraImageSize.width * scaleFactor) - windowSize.width) / 2.0
                 
-                
-                // Break down numbers
-                
-                print("currentState \(currentState) cameraImageSize \(cameraImageSize) screenSize \(screenSize) windowSize \(windowSize) scaleFactor \(scaleFactor) xOffset \(xOffset)")
-                let transform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-                    .concatenating(CGAffineTransform(translationX: -xOffset, y: 0.0))
-
-                // TODO 1: fix transform
-                let maskCIImage = CIImage(cvPixelBuffer: result.pixelBuffer).transformed(by: transform)
+                // Transform camera and mask images
+                let transform = CGAffineTransform.cameraTransform(
+                    state: currentState,
+                    cameraImageSize: cameraImageSize,
+                    screenSize: screenSize
+                )
+                let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: transform)
                 let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: transform)
+                
                 let imageRect = self.cameraView.bounds
                 if let segmentedCGImage = ciContext.createCGImage(cameraCIImage, from: imageRect) {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
