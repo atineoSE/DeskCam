@@ -22,8 +22,6 @@ class CameraViewController: NSViewController {
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
     
-    private var count = 0
-    
     private lazy var detectPersonSegmentationRequest: VNGeneratePersonSegmentationRequest = {
         let request = VNGeneratePersonSegmentationRequest()
         request.revision = VNGeneratePersonSegmentationRequestRevision1
@@ -41,8 +39,6 @@ class CameraViewController: NSViewController {
         print("CAMERA VIEW CONTROLLER: started session")
         
         cameraView.addSubview(segmentedView)
-        //segmentedView.wantsLayer = true
-        //cameraView.wantsLayer = true
     }
     
     override func viewWillAppear() {
@@ -151,8 +147,6 @@ extension CameraViewController {
         }
         updateWindow()
         configure(mask: currentState.mask)
-        
-        count = 0
     }
 }
 
@@ -215,10 +209,6 @@ extension CameraViewController {
             // Transform camera and mask images
             let downsampleTransform = CGAffineTransform.downsampleTransform(initialImageSize: pixelBufferSize, targetImageSize: cameraImageSize)
             let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
-
-            let alpha = CGFloat(min(1.0, 1.0 * 0.01 * Float(count)))
-            count += 1
-            let correctedImage = ColorMatrix().filter(maskCIImage, aVector: .init(x: 0.0, y: 0.0, z: 0.0, w: alpha))!
             
             let background: CIImage
             if state.segmentation == .blur {
@@ -234,7 +224,7 @@ extension CameraViewController {
                 
                 // Compose camera image and mask
                 if
-                    let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: correctedImage),
+                    let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
                     let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
