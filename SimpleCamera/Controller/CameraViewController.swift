@@ -19,6 +19,8 @@ class CameraViewController: NSViewController {
     private var cameraImageSize: CGSize?
     private var cameraTransform: CGAffineTransform?
     
+    private var count = 0
+    
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
     
@@ -147,6 +149,8 @@ extension CameraViewController {
         }
         updateWindow()
         configure(mask: currentState.mask)
+        
+        count = 0
     }
 }
 
@@ -208,7 +212,14 @@ extension CameraViewController {
             
             // Transform camera and mask images
             let downsampleTransform = CGAffineTransform.downsampleTransform(initialImageSize: pixelBufferSize, targetImageSize: cameraImageSize)
-            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
+            
+            let maskCIImage: CIImage
+            if count < 50 {
+                maskCIImage = CIImage(color: .white)
+                count += 1
+            } else {
+                maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
+            }
             
             let background: CIImage
             if state.segmentation == .blur {
@@ -225,7 +236,7 @@ extension CameraViewController {
                 // Compose camera image and mask
                 if
                     let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
-                    let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
+                    let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect.insetBy(dx: 10.0, dy: 10.0))
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                     cameraView.setNeedsDisplay(imageRect)
