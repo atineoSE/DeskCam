@@ -122,7 +122,7 @@ extension CameraViewController {
         cameraView.setNeedsDisplay(viewRect)
         cameraView.displayIfNeeded()
         
-        print("CAMERA VIEW CONTROLLER: Updated layers to \(viewRect)")
+        print("CAMERA VIEW CONTROLLER: Updated frames to \(viewRect)")
     }
     
     private func updateWindow() {
