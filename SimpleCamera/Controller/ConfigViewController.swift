@@ -23,6 +23,8 @@ class ConfigViewController: NSViewController {
     @IBOutlet weak var sizeButtonTwo: NSPopUpButton!
     @IBOutlet weak var segmentationButtonTwo: NSPopUpButton!
     
+    @IBOutlet weak var animateTransitionButton: NSButton!
+    
     weak var stateController: StateController?
     private lazy var viewOneButtons: [NSPopUpButton] = [positionButtonOne, maskButtonOne, sizeButtonOne, segmentationButtonOne]
     private lazy var viewTwoButtons: [NSPopUpButton] = [positionButtonTwo, maskButtonTwo, sizeButtonTwo, segmentationButtonTwo]
@@ -33,6 +35,7 @@ class ConfigViewController: NSViewController {
         setupLabels()
         setupBackgroundViews()
         setupPopUpButtons()
+        setupAnimateTransitionButton()
     }
     
     @IBAction func didChangeButton(_ sender: NSPopUpButton) {
@@ -82,6 +85,10 @@ class ConfigViewController: NSViewController {
         }
     }
     
+    @IBAction func didChangeAnimateTransition(_ sender: NSButton) {
+        stateController?.update(sender.state == .on)
+    }
+    
     @IBAction func didToggleView(_ sender: Any) {
         stateController?.toggleState()
         setupLabels()
@@ -115,6 +122,13 @@ class ConfigViewController: NSViewController {
                 }
             }
         }
+    }
+    
+    private func setupAnimateTransitionButton() {
+        guard let shouldAnimateTransition = stateController?.shouldAnimateTransition else {
+            return
+        }
+        animateTransitionButton.state = shouldAnimateTransition ? .on : .off
     }
 }
 

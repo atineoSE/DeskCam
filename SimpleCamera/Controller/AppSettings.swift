@@ -12,6 +12,7 @@ class AppSettings {
         case stateOne
         case stateTwo
         case currentIndex
+        case shouldAnimateTransition
     }
     
     private static let encoder = JSONEncoder()
@@ -43,6 +44,14 @@ class AppSettings {
     
     class func setCurrentState(at index: Int) {
         UserDefaults.standard.setValue(index, forKey: Key.currentIndex.rawValue)
+    }
+    
+    class func set(shouldAnimateTransition: Bool) {
+        UserDefaults.standard.setValue(shouldAnimateTransition, forKey: Key.shouldAnimateTransition.rawValue)
+    }
+    
+    class func getShouldAnimateTransition() -> Bool {
+        UserDefaults.standard.bool(forKey: Key.shouldAnimateTransition.rawValue)
     }
     
     class func removeAllStates() {

@@ -11,6 +11,7 @@ class StateController {
     private(set) var states: [State]
     private(set) var currentIndex: Int
     private weak var delegate: StateControllerDelegate?
+    private(set) var shouldAnimateTransition: Bool
     
     var currentState: State {
         states[currentIndex]
@@ -23,6 +24,7 @@ class StateController {
             AppSettings.state(at: 0) ?? State.default,
             AppSettings.state(at: 1) ?? State.default
         ]
+        shouldAnimateTransition = AppSettings.getShouldAnimateTransition()
         AppLogger.debug("STATE_CONTROLLER: initialized with states \(states)")
         AppLogger.debug("STATE_CONTROLLER: current state is \(currentState) (index \(currentIndex))")
     }
@@ -45,6 +47,11 @@ class StateController {
     func update(_ segmentation: Segmentation, at index: Int) {
         states[index].segmentation = segmentation
         didUpdate(at: index)
+    }
+    
+    func update(_ shouldAnimateTransition: Bool) {
+        self.shouldAnimateTransition = shouldAnimateTransition
+        AppSettings.set(shouldAnimateTransition: shouldAnimateTransition)
     }
     
     func toggleState() {
