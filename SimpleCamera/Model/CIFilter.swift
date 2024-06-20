@@ -28,3 +28,24 @@ class GaussianBlurFilter {
         return filter.outputImage
     }
 }
+
+class ColorMatrix {
+    private let filter = CIFilter(name: "CIColorMatrix")!
+    init() {}
+    func filter(
+        _ inputImage: CIImage,
+        rVector: CIVector = .init(x: 1.0, y: 0.0, z: 0.0, w: 0.0),
+        gVector: CIVector = .init(x: 0.0, y: 1.0, z: 0.0, w: 0.0),
+        bVector: CIVector = .init(x: 0.0, y: 0.0, z: 1.0, w: 0.0),
+        aVector: CIVector = .init(x: 0.0, y: 0.0, z: 0.0, w: 1.0),
+        biasVector: CIVector = .init(x: 0.0, y: 0.0, z: 0.0, w: 0.0)
+    ) -> CIImage? {
+        filter.setValue(rVector, forKey: "inputRVector")
+        filter.setValue(gVector, forKey: "inputGVector")
+        filter.setValue(bVector, forKey: "inputBVector")
+        filter.setValue(aVector, forKey: "inputAVector")
+        filter.setValue(biasVector, forKey: "inputBiasVector")
+        filter.setValue(inputImage, forKey: kCIInputImageKey)
+        return filter.outputImage
+    }
+}
