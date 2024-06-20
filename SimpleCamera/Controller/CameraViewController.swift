@@ -18,7 +18,6 @@ class CameraViewController: NSViewController {
     private var segmentedView = NSImageView()
     private var cameraImageSize: CGSize?
     private var cameraTransform: CGAffineTransform?
-    private var count = 0
     
     @IBOutlet weak var cameraView: NSView!
     weak var stateController: StateController?
@@ -123,8 +122,6 @@ extension CameraViewController {
         cameraView.setNeedsDisplay(viewRect)
         cameraView.displayIfNeeded()
         
-        count = 0
-        
         print("CAMERA VIEW CONTROLLER: Updated frames to \(viewRect)")
     }
     
@@ -225,16 +222,10 @@ extension CameraViewController {
                 guard let self = self else { return }
                 let imageRect = self.cameraView.bounds  // Important to refer to actual view and not to window rect
                 
-                let insetBiasX = min(CGFloat(count), imageRect.width / 2.0)
-                let insetBiasY = min(CGFloat(count), imageRect.height / 2.0)
-                let insetRect = imageRect.insetBy(dx: (imageRect.width / 2.0) - insetBiasX, dy: (imageRect.height / 2.0) - insetBiasY)
-                count += 10
-                
-                
                 // Compose camera image and mask
                 if
                     let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
-                    let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: insetRect)
+                    let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
                 {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                     cameraView.setNeedsDisplay(imageRect)
