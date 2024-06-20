@@ -133,9 +133,9 @@ extension CameraViewController {
         else {
             return
         }
-        // We set the window rect relative to the screen size
+        
         let currentState = stateController.currentState
-        let windowRect = currentState.rect(from: screenSize)
+        let windowRect = currentState.rect(from: screenSize) // Set the window rect relative to the screen size
         window.update(with: windowRect, shouldAnimate: stateController.shouldAnimateTransition)
         AppLogger.debug("CAMERA_VIEW_CONTROLLER: Updated window with screen size \(screenSize) to \(windowRect) (state: \(currentState))")
     }
