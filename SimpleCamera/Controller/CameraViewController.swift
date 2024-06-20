@@ -10,7 +10,6 @@ import AVFoundation
 import Vision
 
 class CameraViewController: NSViewController {
-    private var cameraLayer: AVCaptureVideoPreviewLayer?
     private var bufferSize: CGSize = .zero
     private let session = AVCaptureSession()
     private var videoDataOutput = AVCaptureVideoDataOutput()
@@ -102,22 +101,6 @@ extension CameraViewController {
             cameraImageSize = CGSize(width: Int(dimensions.width), height: Int(dimensions.height))
         }
     }
-    
-    /* -- Use to render camera view directly
-    private func setupLayers() {
-        let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
-        cameraLayer.backgroundColor = .clear
-        cameraLayer.borderColor = .clear
-        cameraLayer.shadowColor = .clear
-        
-        cameraLayer.connection?.automaticallyAdjustsVideoMirroring = false
-        cameraLayer.connection?.isVideoMirrored = false
-        self.cameraLayer = cameraLayer
-        cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        cameraView.wantsLayer = true
-        cameraView.layer = cameraLayer
-    }
-     */
 }
 
 // MARK: - State
@@ -133,7 +116,6 @@ extension CameraViewController {
         
         // Apply mask
         cameraView.layer?.mask = shapeLayer
-        cameraLayer?.frame = viewRect
         
         // Update segmented view
         segmentedView.frame = viewRect
