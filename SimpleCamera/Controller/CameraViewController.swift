@@ -114,7 +114,7 @@ extension CameraViewController {
         shapeLayer.path = mask.path(in: viewRect)
         shapeLayer.borderColor = .clear
         
-        // Apply mask
+        // Apply window mask
         cameraView.layer?.mask = shapeLayer
         
         // Update segmented view
