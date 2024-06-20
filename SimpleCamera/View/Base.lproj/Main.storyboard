@@ -66,8 +66,9 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Toggle view" keyEquivalent="t" id="GrK-0y-9I2">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" option="YES" command="YES"/>
                                             <connections>
-                                                <action selector="didToggleView:" target="Ady-hI-5gd" id="zoO-uQ-X1y"/>
+                                                <action selector="didToggleView:" target="Voe-Tx-rLC" id="cG6-GB-ZHx"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
@@ -141,7 +142,11 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DeskCam" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="DeskCam" customModuleProvider="target">
+                    <connections>
+                        <outlet property="toggleViewMenuItem" destination="GrK-0y-9I2" id="MBA-4b-hBD"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

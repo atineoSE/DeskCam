@@ -6,13 +6,16 @@
 //
 
 import Cocoa
+import HotKey
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var window: NSWindow?
     private var stateController: StateController!
     private var cameraViewController: CameraViewController!
+    private let hotkey = HotKey(key: .t, modifiers: [.command, .option, .control])
     
+    @IBOutlet weak var toggleViewMenuItem: NSMenuItem!
     private var mainStoryboard: NSStoryboard {
         return NSStoryboard(name: "Main", bundle: nil)
     }
@@ -29,6 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window = NSWindow(contentViewController: cameraViewController)
         window?.makeKeyAndOrderFront(self)
         window?.setup()
+        
+        configureKeys()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -45,8 +50,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func didToggleView(_ sender: Any) {
-        print("APP DELEGATE: toggled view from menu button or shortcut")
+        print("APP DELEGATE: toggled view")
         stateController.toggleState()
+    }
+    
+    private func configureKeys() {
+        hotkey.keyDownHandler = { [weak self] in
+            guard let self = self else { return }
+            print("APP DELEGATE: hotkey pressed")
+            self.didToggleView(self)
+        }
     }
 }
 
