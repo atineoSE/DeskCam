@@ -129,6 +129,7 @@ extension CameraViewController {
         let shapeLayer = CAShapeLayer()
         shapeLayer.frame = viewRect
         shapeLayer.path = mask.path(in: viewRect)
+        shapeLayer.borderColor = .clear
         
         // Apply mask
         cameraView.layer?.mask = shapeLayer
