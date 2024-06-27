@@ -119,7 +119,7 @@ extension CameraViewController {
         
         // Update segmented view
         segmentedView.frame = viewRect
-        cameraView.setNeedsDisplay(viewRect)
+        cameraView.setNeedsDisplay(viewRect.insetBy(dx: 1.0, dy: 1.0))
         cameraView.displayIfNeeded()
         
         print("CAMERA VIEW CONTROLLER: Updated frames to \(viewRect)")
