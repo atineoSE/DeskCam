@@ -161,24 +161,47 @@ extension CameraViewController: StateControllerDelegate {
 // MARK: - Vision
 
 extension CameraViewController {
+    private var cameraToWindowTransform: CGAffineTransform? {
+        guard
+            let cameraImageSize = cameraImageSize,
+            let currentState = stateController?.currentState,
+            let screenSize = NSScreen.screenSize
+        else {
+            return nil
+        }
+        let windowSize = currentState.size.size(over: screenSize)
+        return CGAffineTransform.cameraTransform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
+    }
+    
+    private func observationToCameraTransform(buffer: CVPixelBuffer) -> CGAffineTransform? {
+        guard let cameraImageSize = cameraImageSize else {
+            return nil
+        }
+        let pixelBufferSize = CGSize(
+            width: CGFloat(CVPixelBufferGetWidth(buffer)),
+            height: CGFloat(CVPixelBufferGetHeight(buffer))
+        )
+        return CGAffineTransform.downsampleTransform(initialImageSize: pixelBufferSize, targetImageSize: cameraImageSize)
+    }
+    
     private func segment(buffer: CMSampleBuffer) {
         guard 
             let cameraImageBuffer = buffer.imageBuffer,
             let state = stateController?.currentState,
-            let screenSize = NSScreen.screenSize,
-            let cameraImageSize = cameraImageSize
+            let cameraToWindowTransform = cameraToWindowTransform
         else {
             return
         }
         
-        let windowSize = state.size.size(over: screenSize)
-        let cameraTransform = CGAffineTransform.cameraTransform(initialImageSize: cameraImageSize, targetImageSize: windowSize)
-        let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraTransform)
+        // Get camera image
+        let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraToWindowTransform)
         
         // No segmentation to do, just return the image
         guard state.segmentation != .none else {
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 let imageRect = self.cameraView.bounds  // Important to refer to actual view and not to window rect
                 if let cameraCGImage = ciContext.createCGImage(cameraCIImage, from: imageRect) {
                     segmentedView.image = NSImage(cgImage: cameraCGImage, size: .zero)
@@ -199,17 +222,14 @@ extension CameraViewController {
                 return
             }
             
-            // Get mask from observation
+            // Transform mask image
             let maskPixelBuffer = result.pixelBuffer
-            let pixelBufferSize = CGSize(
-                width: CGFloat(CVPixelBufferGetWidth(maskPixelBuffer)),
-                height: CGFloat(CVPixelBufferGetHeight(maskPixelBuffer))
-            )
+            guard let downsampleTransform = observationToCameraTransform(buffer: maskPixelBuffer) else {
+                return
+            }
+            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraToWindowTransform))
             
-            // Transform camera and mask images
-            let downsampleTransform = CGAffineTransform.downsampleTransform(initialImageSize: pixelBufferSize, targetImageSize: cameraImageSize)
-            let maskCIImage = CIImage(cvPixelBuffer: maskPixelBuffer).transformed(by: downsampleTransform.concatenating(cameraTransform))
-            
+            // Get background
             let background: CIImage
             if state.segmentation == .blur {
                 background = GaussianBlurFilter().filter(cameraCIImage, radius: 5.0) ?? CIImage.empty()
@@ -217,22 +237,23 @@ extension CameraViewController {
                 // Cutout
                 background = CIImage.empty()
             }
-
+            
+            // Apply mask
+            let cameraCIImage = CIImage(cvImageBuffer: cameraImageBuffer).transformed(by: cameraToWindowTransform)
+            guard let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage) else {
+                AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to apply blend with mask filter")
+                return
+            }
+            
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 let imageRect = self.cameraView.bounds  // Important to refer to actual view and not to window rect
-                
-                // Compose camera image and mask
-                if
-                    let segmentedCIImage = BlendWithMask().filter(cameraCIImage, backgroundImage: background, maskImage: maskCIImage),
-                    let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect)
-                {
+                if let segmentedCGImage = ciContext.createCGImage(segmentedCIImage, from: imageRect) {
                     segmentedView.image = NSImage(cgImage: segmentedCGImage, size: .zero)
                     cameraView.setNeedsDisplay(imageRect)
                     cameraView.displayIfNeeded()
                 }
             }
-
         } catch let error as NSError {
             AppLogger.error("CAMERA_VIEW_CONTROLLER: Failed to perform segmentation request with error \(error.localizedDescription)")
         }
