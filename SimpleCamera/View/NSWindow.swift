@@ -16,6 +16,7 @@ extension NSWindow {
         styleMask = .borderless
         level = .floating
         backgroundColor = .clear
+        hasShadow = false
     }
     
     func animationResizeTime(_ newFrame: NSRect) -> TimeInterval {
